@@ -1,8 +1,10 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "role")
 public class Role {
     @Id

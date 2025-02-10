@@ -1,7 +1,7 @@
-package huy.module4casestudy.model;
+package huy.module4casestudy.model.composite;
 
+import huy.module4casestudy.model.Member;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Check;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,14 +19,29 @@ public class SalaryId implements Serializable {
     @JoinColumn(name = "id")
     private Member member;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public int getMonth() { return month; }
-    public void setMonth(int month) { this.month = month; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     @Override
     public boolean equals(Object o) {

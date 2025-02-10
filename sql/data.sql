@@ -84,7 +84,7 @@ INSERT INTO user (id, username, password, role_id) VALUES
 (17, 'hazard', 'hazard7', 3),
 (18, 'pogba', 'pogba6', 3);
 
-INSERT INTO coaches (id) VALUES
+INSERT INTO coach (id) VALUES
 (2), -- Pep Guardiola
 (3); -- Jurgen Klopp
 

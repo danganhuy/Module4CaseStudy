@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết cầu thủ</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h2>Chi tiết cầu thủ</h2>
+<img th:src="@{/images/{filename}(filename=${player.avatar})}" alt="Avatar">
+<p><strong>Tên:</strong> <span th:text="${player.name}"></span></p>
+<p><strong>Năm sinh:</strong> <span th:text="${player.dob}"></span></p>
+<p><strong>Quê quán:</strong> <span th:text="${player.hometown}"></span></p>
+<p><strong>Vị trí chơi:</strong> <span th:text="${player.position}"></span></p>
+<p><strong>Phong độ:</strong> <span th:text="${player.performance}"></span></p>
+<p><strong>Chiều cao:</strong> <span th:text="${player.height}"></span> cm</p>
+<p><strong>Cân nặng:</strong> <span th:text="${player.weight}"></span> kg</p>
+<p><strong>Chỉ số BMI:</strong> <span th:text="${player.bmi}"></span></p>
+<p><strong>Lương cứng:</strong> <span th:text="${player.baseSalary}"></span> USD</p>
+<p><strong>Thưởng:</strong> <span th:text="${player.bonus}"></span> USD</p>
+<p><strong>Xếp hạng:</strong> <span th:text="${player.ranking}"></span></p>
+<p><strong>Hồ sơ năng lực:</strong> <a th:href="@{/files/{filename}(filename=${player.profile})}">Tải xuống</a></p>
+
+<h3>Biểu đồ lương theo tuần</h3>
+<canvas id="salaryChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let ctx = document.getElementById('salaryChart').getContext('2d');
+        let salaryChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Tổng lương theo tuần',
+                    data: [],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        let playerId = "[[${player.id}]]"; // Định dạng an toàn hơn
+        fetch('/players/' + playerId + '/salaries')
+            .then(response => response.json())
+            .then(data => {
+                salaryChart.data.labels = data.salaryWeeks;
+                salaryChart.data.datasets[0].data = data.salaryValues;
+                salaryChart.update();
+            });
+    });
+</script>
+</body>
+</html>

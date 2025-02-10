@@ -42,4 +42,20 @@ public class SalaryId implements Serializable {
     public int hashCode() {
         return Objects.hash(id, month, year);
     }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }

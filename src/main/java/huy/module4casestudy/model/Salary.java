@@ -15,4 +15,28 @@ public class Salary {
 
     @Column(columnDefinition = "DOUBLE DEFAULT 0")
     private Double incentive;
+
+    public SalaryId getId() {
+        return id;
+    }
+
+    public void setId(SalaryId id) {
+        this.id = id;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Double getIncentive() {
+        return incentive;
+    }
+
+    public void setIncentive(Double incentive) {
+        this.incentive = incentive;
+    }
 }

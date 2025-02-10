@@ -33,4 +33,52 @@ public class Player {
     @MapsId
     @JoinColumn(name = "coach_id")
     private Coach coach;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public BigDecimal getHeight() {
+        return height;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public BigDecimal getBmi() {
+        return bmi;
+    }
+
+    public Integer getRanking() {
+        return ranking;
+    }
+
+    public Coach getCoach() {
+        return coach;
+    }
+
+    public void setHeight(BigDecimal height) {
+        this.height = height;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public void setBmi(BigDecimal bmi) {
+        this.bmi = bmi;
+    }
+
+    public void setRanking(Integer ranking) {
+        this.ranking = ranking;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
+    }
 }

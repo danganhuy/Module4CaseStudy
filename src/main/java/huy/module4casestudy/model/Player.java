@@ -1,10 +1,12 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Entity
+@Data
 @Table(name = "player")
 public class Player {
     @Id
@@ -26,11 +28,10 @@ public class Player {
 
     private Integer ranking;
 
-    @Column(name = "coach_id")
-    private Long coachId;
+    @Column(name = "team_id", insertable = false, updatable = false)
+    private Long teamId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
+    @JoinColumn(name = "team_id")
+    private Team team;
 }

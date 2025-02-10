@@ -1,8 +1,10 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "coach")
 public class Coach {
     @Id
@@ -12,4 +14,11 @@ public class Coach {
     @MapsId
     @JoinColumn(name = "id")
     private Member member;
+
+    @Column(name = "team_id", insertable = false, updatable = false)
+    private Long teamId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 }

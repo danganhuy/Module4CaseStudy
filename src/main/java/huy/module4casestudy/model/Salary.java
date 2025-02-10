@@ -1,5 +1,6 @@
 package huy.module4casestudy.model;
 
+import huy.module4casestudy.model.composite.SalaryId;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 

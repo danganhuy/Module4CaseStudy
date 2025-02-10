@@ -3,9 +3,6 @@ package huy.module4casestudy.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
-
-
 @Entity
 @Data
 @Table(name = "user")

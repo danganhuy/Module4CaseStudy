@@ -42,37 +42,23 @@ public class SecurityConfiguration {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-        // return NoOpPasswordEncoder.getInstance();
+        return NoOpPasswordEncoder.getInstance();
+//        return new BCryptPasswordEncoder();
     }
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService((UserDetailsService) userService);
-        authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-//        http.formLogin(Customizer.withDefaults())
-//                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
-//                .authorizeHttpRequests(
-//                        author -> author
-//                                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                                .requestMatchers("/coach/**").hasRole("COACH")
-//                                .requestMatchers("/player/**").hasRole("PLAYER")
-//                ).csrf(AbstractHttpConfigurer::disable);
-//        return http.build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         auth -> auth
-                                //.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/api/login").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/coach/**").hasRole("COACH")

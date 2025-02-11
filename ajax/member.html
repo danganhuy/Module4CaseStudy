@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thành viên</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>Danh sách thành viên</h2>
+
+<!-- Dropdown lọc theo loại thành viên -->
+<label for="filterMemberType">Lọc theo loại thành viên:</label>
+<select id="filterMemberType">
+    <option value="">Tất cả</option>
+    <option value="PLAYER">Cầu thủ</option>
+    <option value="COACH">Huấn luyện viên</option>
+</select>
+
+<!-- Bảng hiển thị danh sách thành viên -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Họ và tên</th>
+        <th>Ngày sinh</th>
+        <th>Quốc tịch</th>
+        <th>Quê quán</th>
+        <th>Loại thành viên</th>
+        <th>Chi tiết</th>
+        <th>Sửa</th>
+        <th>Xóa</th>
+    </tr>
+    </thead>
+    <tbody id="memberTableBody">
+    <!-- Dữ liệu sẽ được load bằng AJAX -->
+    </tbody>
+</table>
+<!--<table border="1">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Họ và tên</th>-->
+<!--        <th>Ngày sinh</th>-->
+<!--        <th>Quốc tịch</th>-->
+<!--        <th>Quê quán</th>-->
+<!--        <th>Loại thành viên</th>-->
+<!--        <th>Chi tiết</th>-->
+<!--        <th>Sửa</th>-->
+<!--        <th>Xóa</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody id="memberTableBody">-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--&lt;!&ndash; Modal hiển thị chi tiết &ndash;&gt;-->
+<!--<div id="detailModal" style="display: none;">-->
+<!--    <h2>Chi tiết thành viên</h2>-->
+<!--    <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>-->
+<!--    <p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>-->
+<!--    <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>-->
+<!--    <p><strong>Quê quán:</strong> <span id="detailHometown"></span></p>-->
+<!--    <p><strong>Loại:</strong> <span id="detailMemberType"></span></p>-->
+<!--    <p id="playerDetails" style="display: none;">-->
+<!--        <strong>Chiều cao:</strong> <span id="detailHeight"></span> m<br>-->
+<!--        <strong>Cân nặng:</strong> <span id="detailWeight"></span> kg<br>-->
+<!--        <strong>BMI:</strong> <span id="detailBmi"></span><br>-->
+<!--        <strong>Xếp hạng:</strong> <span id="detailRanking"></span>-->
+<!--    </p>-->
+<!--    <button onclick="closeDetailModal()">Đóng</button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Form chỉnh sửa &ndash;&gt;-->
+<!--<div id="editForm" style="display: none;">-->
+<!--    <h2>Chỉnh sửa thành viên</h2>-->
+<!--    <input type="hidden" id="editId">-->
+<!--    <label>Họ và tên: <input type="text" id="editFullName"></label><br>-->
+<!--    <label>Ngày sinh: <input type="date" id="editDateOfBirth"></label><br>-->
+<!--    <label>Quốc tịch: <input type="text" id="editNationality"></label><br>-->
+<!--    <label>Quê quán: <input type="text" id="editHometown"></label><br>-->
+<!--    <label>Loại thành viên:-->
+<!--        <select id="editMemberType">-->
+<!--            <option value="PLAYER">Cầu thủ</option>-->
+<!--            <option value="COACH">Huấn luyện viên</option>-->
+<!--        </select>-->
+<!--    </label><br>-->
+<!--    <div id="playerEditFields" style="display: none;">-->
+<!--        <label>Chiều cao: <input type="number" step="0.01" id="editHeight"></label><br>-->
+<!--        <label>Cân nặng: <input type="number" step="0.01" id="editWeight"></label><br>-->
+<!--        <label>BMI: <input type="number" step="0.01" id="editBmi"></label><br>-->
+<!--        <label>Xếp hạng: <input type="number" id="editRanking"></label><br>-->
+<!--    </div>-->
+<!--    <button onclick="updateMember()">Lưu</button>-->
+<!--    <button onclick="closeEditForm()">Hủy</button>-->
+<!--</div>-->
+
+
+<script src="member.js"></script>
+</body>
+</html>

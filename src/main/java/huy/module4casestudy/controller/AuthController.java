@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin("*")
 public class AuthController {
-
-
     private final AuthenticationManager authenticationManager;
 
     @Autowired
@@ -35,7 +33,6 @@ public class AuthController {
 
     @PostMapping("/api/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-
         Authentication authentication
                 = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);

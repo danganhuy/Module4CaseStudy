@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Thành Viên</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">Danh Sách Thành Viên</h2>
+    <button class="btn btn-primary mb-3" id="loadMembers">Tải Danh Sách</button>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Họ và Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Quốc Tịch</th>
+            <th>Quê Quán</th>
+            <th>Loại Thành Viên</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody id="memberTableBody">
+        <!-- Dữ liệu sẽ được hiển thị ở đây -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal hiển thị chi tiết -->
+<div class="modal fade" id="memberDetailModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Chi Tiết Thành Viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>ID:</strong> <span id="detailId"></span></p>
+                <p><strong>Họ và Tên:</strong> <span id="detailName"></span></p>
+                <p><strong>Ngày Sinh:</strong> <span id="detailDob"></span></p>
+                <p><strong>Quốc Tịch:</strong> <span id="detailNationality"></span></p>
+                <p><strong>Quê Quán:</strong> <span id="detailHometown"></span></p>
+                <p><strong>Loại Thành Viên:</strong> <span id="detailType"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Tải danh sách members
+        $("#loadMembers").click(function () {
+            $.ajax({
+                url: "http://localhost:8080/api/members",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $("#memberTableBody").empty();
+                    $.each(data, function (index, member) {
+                        let row = `<tr>
+                                <td>${member.id}</td>
+                                <td>${member.fullName}</td>
+                                <td>${member.dateOfBirth}</td>
+                                <td>${member.nationality}</td>
+                                <td>${member.hometown}</td>
+                                <td>${member.memberType}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm view-member" data-id="${member.id}">Xem</button>
+                                    <button class="btn btn-danger btn-sm delete-member" data-id="${member.id}">Xóa</button>
+                                </td>
+                            </tr>`;
+                        $("#memberTableBody").append(row);
+                    });
+                },
+                error: function () {
+                    alert("Lỗi khi tải dữ liệu!");
+                }
+            });
+        });
+
+        // Xem chi tiết Member
+        $(document).on("click", ".view-member", function () {
+            let memberId = $(this).data("id");
+            $.ajax({
+                url: `http://localhost:8080/api/members/${memberId}`,
+                type: "GET",
+                dataType: "json",
+                success: function (member) {
+                    $("#detailId").text(member.id);
+                    $("#detailName").text(member.fullName);
+                    $("#detailDob").text(member.dateOfBirth);
+                    $("#detailNationality").text(member.nationality);
+                    $("#detailHometown").text(member.hometown);
+                    $("#detailType").text(member.memberType);
+                    $("#memberDetailModal").modal("show");
+                },
+                error: function () {
+                    alert("Lỗi khi lấy thông tin chi tiết!");
+                }
+            });
+        });
+
+        // Xóa Member
+        $(document).on("click", ".delete-member", function () {
+            let memberId = $(this).data("id");
+            if (confirm("Bạn có chắc muốn xóa thành viên này không?")) {
+                $.ajax({
+                    url: `http://localhost:8080/api/members/${memberId}`,
+                    type: "DELETE",
+                    success: function () {
+                        alert("Xóa thành công!");
+                        $("#loadMembers").click(); // Reload danh sách
+                    },
+                    error: function () {
+                        alert("Lỗi khi xóa thành viên!");
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

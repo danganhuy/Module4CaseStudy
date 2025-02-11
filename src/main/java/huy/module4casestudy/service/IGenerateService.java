@@ -1,6 +1,6 @@
 package huy.module4casestudy.service;
 
-import huy.module4casestudy.model.Coach;
+import huy.module4casestudy.model.Member;
 
 import java.util.Optional;
 
@@ -9,8 +9,7 @@ public interface IGenerateService<T> {
 
     Optional<T> findById(Long id);
 
-
-    Coach save(T object);
+    void save(T object);
 
     void deleteById(Long id);
 

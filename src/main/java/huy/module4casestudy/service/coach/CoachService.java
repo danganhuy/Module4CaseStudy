@@ -1,6 +1,7 @@
 package huy.module4casestudy.service.coach;
 
 import huy.module4casestudy.model.Coach;
+import huy.module4casestudy.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import huy.module4casestudy.repository.ICoachRepository;
@@ -24,8 +25,8 @@ public class CoachService implements ICoachService{
     }
 
     @Override
-    public Coach save(Coach coach) {
-        return iCoachRepository.save(coach);
+    public void save(Coach coach) {
+//        iCoachRepository.save(coach);
     }
 
     @Override

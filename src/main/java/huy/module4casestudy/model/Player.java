@@ -1,5 +1,6 @@
 package huy.module4casestudy.model;
 
+import huy.module4casestudy.model.composite.EStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,6 +28,9 @@ public class Player {
     private BigDecimal bmi;
 
     private Integer ranking;
+
+    @Enumerated(EnumType.STRING)
+    private EStatus status;
 
     @Column(name = "team_id", insertable = false, updatable = false)
     private Long teamId;

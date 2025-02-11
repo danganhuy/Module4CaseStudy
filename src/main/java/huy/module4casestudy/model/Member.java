@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.BeanProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.awt.*;
 import java.time.LocalDate;
 
 
@@ -30,36 +31,5 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private EMemberType memberType;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public String getHometown() {
-        return hometown;
-    }
-
-    public EMemberType getMemberType() {
-        return memberType;
-    }
-
-    public Member getMember() {
-        return null;
-    }
-
-    public Object getRanking() {
-        return null;
-    }
 }
 

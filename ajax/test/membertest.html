@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Danh sách thành viên</h2>
+
+<!-- Dropdown lọc theo loại thành viên -->
+<label for="filterMemberType">Lọc theo loại thành viên:</label>
+<select id="filterMemberType">
+  <option value="">Tất cả</option>
+  <option value="PLAYER">Cầu thủ</option>
+  <option value="COACH">Huấn luyện viên</option>
+</select>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Họ và tên</th>
+    <th>Ngày sinh</th>
+    <th>Quốc tịch</th>
+    <th>Quê quán</th>
+    <th>Loại thành viên</th>
+    <th>Chi tiết</th>
+    <th>Sửa</th>
+    <th>Xóa</th>
+  </tr>
+  </thead>
+  <tbody id="memberTableBody">
+  <!-- Dữ liệu sẽ được load bằng AJAX -->
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    function loadMembers(filterType = "") {
+      $.ajax({
+        url: "http://localhost:8080/api/members",
+        type: "GET",
+        success: function (data) {
+          let tableBody = $("#memberTableBody");
+          tableBody.empty();
+
+          data.forEach(member => {
+            if (filterType === "" || member.memberType === filterType) {
+              let row = `
+                        <tr>
+                            <td>${member.id}</td>
+                            <td>${member.fullName}</td>
+                            <td>${member.dateOfBirth}</td>
+                            <td>${member.nationality}</td>
+                            <td>${member.hometown}</td>
+                            <td>${member.memberType}</td>
+                            <td><a href="detail.html?id=${member.id}">Chi tiết</a></td>
+                            <td><a href="edit.html?id=${member.id}">Sửa</a></td>
+                            <td><button onclick="deleteMember(${member.id})">Xóa</button></td>
+                        </tr>
+                    `;
+              tableBody.append(row);
+            }
+          });
+        }
+
+      });
+    }
+
+    // Bắt sự kiện khi chọn dropdown để lọc danh sách
+    $("#filterMemberType").change(function () {
+      let selectedType = $(this).val();
+      loadMembers(selectedType);
+    });
+
+
+    function deleteMember(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa?")) {
+        $.ajax({
+          url: `http://localhost:8080/api/members/${id}`,
+          type: "DELETE",
+          success: function () {
+            alert("Xóa thành công!");
+            loadMembers();
+          }
+        });
+      }
+    }
+
+    loadMembers();
+  });
+</script>
+</body>
+</html>

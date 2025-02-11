@@ -1,16 +1,19 @@
 package huy.module4casestudy.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "role")
-public class Role {
+@Table(name = "team")
+public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50)
     private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 }

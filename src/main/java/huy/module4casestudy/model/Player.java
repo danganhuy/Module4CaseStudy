@@ -1,10 +1,12 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Entity
+@Data
 @Table(name = "player")
 public class Player {
     @Id
@@ -26,59 +28,10 @@ public class Player {
 
     private Integer ranking;
 
-    @Column(name = "coach_id")
-    private Long coachId;
+    @Column(name = "team_id", insertable = false, updatable = false)
+    private Long teamId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "coach_id")
-    private Coach coach;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Member getMember() {
-        return member;
-    }
-
-    public BigDecimal getHeight() {
-        return height;
-    }
-
-    public BigDecimal getWeight() {
-        return weight;
-    }
-
-    public BigDecimal getBmi() {
-        return bmi;
-    }
-
-    public Integer getRanking() {
-        return ranking;
-    }
-
-    public Coach getCoach() {
-        return coach;
-    }
-
-    public void setHeight(BigDecimal height) {
-        this.height = height;
-    }
-
-    public void setWeight(BigDecimal weight) {
-        this.weight = weight;
-    }
-
-    public void setBmi(BigDecimal bmi) {
-        this.bmi = bmi;
-    }
-
-    public void setRanking(Integer ranking) {
-        this.ranking = ranking;
-    }
-
-    public void setCoach(Coach coach) {
-        this.coach = coach;
-    }
+    @JoinColumn(name = "team_id")
+    private Team team;
 }

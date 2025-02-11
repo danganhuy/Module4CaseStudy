@@ -17,4 +17,7 @@ public interface IPlayerRepository extends JpaRepository<Player, Long> {
     // Lấy thông tin chi tiết của Player + Member
     @Query("SELECT p FROM Player p JOIN FETCH p.member WHERE p.id = :id")
     Optional<Player> findPlayerDetailsById(@Param("id") Long id);
+
+    @Query("SELECT p FROM Player p JOIN FETCH p.member")
+    List<Player> findAllWithMember();
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thành viên</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>Danh sách thành viên</h2>
+
+<!-- Dropdown lọc theo loại thành viên -->
+<label for="filterMemberType">Lọc theo loại thành viên:</label>
+<select id="filterMemberType">
+    <option value="">Tất cả</option>
+    <option value="PLAYER">Cầu thủ</option>
+    <option value="COACH">Huấn luyện viên</option>
+</select>
+
+<!-- Bảng hiển thị danh sách thành viên -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Họ và tên</th>
+        <th>Ngày sinh</th>
+        <th>Quốc tịch</th>
+        <th>Quê quán</th>
+        <th>Loại thành viên</th>
+        <th>Chi tiết</th>
+        <th>Sửa</th>
+        <th>Xóa</th>
+    </tr>
+    </thead>
+    <tbody id="memberTableBody">
+    <!-- Dữ liệu sẽ được load bằng AJAX -->
+    </tbody>
+</table>
+
+<script src="member.js"></script>
+</body>
+</html>

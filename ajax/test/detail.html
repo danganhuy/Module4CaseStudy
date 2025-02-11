@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết thành viên</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>Chi tiết thành viên</h2>
+<p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
+<p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>
+<p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
+<p><strong>Quê quán:</strong> <span id="detailHometown"></span></p>
+<p><strong>Loại thành viên:</strong> <span id="detailMemberType"></span></p>
+
+<div id="playerDetails" style="display: none;">
+  <h3>Thông tin cầu thủ</h3>
+  <p><strong>Chiều cao:</strong> <span id="detailHeight"></span> m</p>
+  <p><strong>Cân nặng:</strong> <span id="detailWeight"></span> kg</p>
+  <p><strong>BMI:</strong> <span id="detailBmi"></span></p>
+  <p><strong>Xếp hạng:</strong> <span id="detailRanking"></span></p>
+</div>
+
+<a href="membertest.html">Quay lại danh sách</a>
+
+<script>
+  $(document).ready(function () {
+    let urlParams = new URLSearchParams(window.location.search);
+    let memberId = urlParams.get("id");
+
+    $.ajax({
+      url: `http://localhost:8080/api/members/${memberId}/details`,
+      type: "GET",
+      success: function (data) {
+        $("#detailFullName").text(data.fullName);
+        $("#detailDateOfBirth").text(data.dateOfBirth);
+        $("#detailNationality").text(data.nationality);
+        $("#detailHometown").text(data.hometown);
+        $("#detailMemberType").text(data.memberType);
+
+        if (data.memberType === "PLAYER") {
+          $("#playerDetails").show();
+          $("#detailHeight").text(data.height);
+          $("#detailWeight").text(data.weight);
+          $("#detailBmi").text(data.bmi);
+          $("#detailRanking").text(data.ranking);
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

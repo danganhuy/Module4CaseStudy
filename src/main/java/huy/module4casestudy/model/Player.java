@@ -1,10 +1,12 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Entity
+@Data
 @Table(name = "player")
 public class Player {
     @Id

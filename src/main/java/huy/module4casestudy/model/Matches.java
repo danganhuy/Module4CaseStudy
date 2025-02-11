@@ -1,10 +1,12 @@
 package huy.module4casestudy.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "matches")
 public class Matches {
     @Id

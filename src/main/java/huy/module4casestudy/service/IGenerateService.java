@@ -1,7 +1,5 @@
 package huy.module4casestudy.service;
 
-import huy.module4casestudy.model.Member;
-
 import java.util.Optional;
 
 public interface IGenerateService<T> {

@@ -20,16 +20,16 @@ public class MatchesService implements IMatchesService {
 
     @Override
     public Optional<Matches> findById(Long id) {
-        return Optional.empty();
+        return matchesRepository.findById(id);
     }
 
     @Override
     public void save(Matches matches) {
-
+        matchesRepository.save(matches);
     }
 
     @Override
     public void delete(Matches matches) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

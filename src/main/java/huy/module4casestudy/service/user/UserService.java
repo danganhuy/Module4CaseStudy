@@ -29,21 +29,22 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public List<User> findAll() {
-        return List.of();
+        throw new UnsupportedOperationException("Not allowed to list add users");
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        throw new UnsupportedOperationException("Not allowed to find user by id");
     }
 
     @Override
     public void save(User user) {
-
+        throw new UnsupportedOperationException("Not allowed to save user");
     }
 
     @Override
     public void delete(User user) {
-
+        user.setDisabled(true);
+        userRepository.save(user);
     }
 }

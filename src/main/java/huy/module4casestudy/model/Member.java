@@ -31,5 +31,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private EMemberType memberType;
 
+    @Column(length = 255)
+    private String fileName;
 }
 

@@ -17,7 +17,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 255)
+    @Column(name = "full_name", length = 255)
     private String fullName;
 
     private LocalDate dateOfBirth;

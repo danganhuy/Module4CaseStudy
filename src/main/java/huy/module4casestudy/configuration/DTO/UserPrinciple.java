@@ -1,6 +1,5 @@
 package huy.module4casestudy.configuration.DTO;
 
-import huy.module4casestudy.model.Role;
 import huy.module4casestudy.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

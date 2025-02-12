@@ -35,10 +35,12 @@ public class SecurityConfiguration {
     public JdbcUserDetailsManager userDetailsService(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
+
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
@@ -57,13 +59,12 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                                .requestMatchers("/**").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/api/login").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/coach/**").hasRole("COACH")
                                 .requestMatchers("/player/**").hasRole("PLAYER")
                 )
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất cả request
                 .build();
     }
 

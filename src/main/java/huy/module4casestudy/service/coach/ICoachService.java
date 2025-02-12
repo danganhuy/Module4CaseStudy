@@ -1,7 +1,7 @@
 package huy.module4casestudy.service.coach;
 
 import huy.module4casestudy.model.Coach;
-import huy.module4casestudy.service.IGenerateService;
+import huy.module4casestudy.service.IGenericService;
 
-public interface ICoachService extends IGenerateService<Coach> {
+public interface ICoachService extends IGenericService<Coach> {
 }

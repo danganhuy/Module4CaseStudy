@@ -43,6 +43,7 @@
                 $("#editNationality").val(data.nationality);
                 $("#editHometown").val(data.hometown);
                 $("#editMemberType").val(data.memberType);
+
                 if (data.memberType === "PLAYER") {
                     $("#playerEditFields").show();
                     $("#editHeight").val(data.player.height);

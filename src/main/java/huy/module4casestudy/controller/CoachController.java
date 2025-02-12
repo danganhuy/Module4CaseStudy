@@ -1,30 +1,16 @@
 package huy.module4casestudy.controller;
 
-import huy.module4casestudy.model.Coach;
-import huy.module4casestudy.model.Member;
-import huy.module4casestudy.service.coach.CoachService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/coaches")
+@RequestMapping("/coach")
+@CrossOrigin("*")
 public class CoachController {
-    private CoachService coachService;
-
-    @GetMapping
-    public List<Coach> getAllCoaches() {
-        return coachService.findAll();
+    @GetMapping("")
+    public String coach() {
+        return "coach";
     }
-
-    @GetMapping("/{id}")
-    public Optional<Coach> getCoachById(@PathVariable Long id) {
-        return coachService.findById(id);
-    }
-//    @PostMapping
-//    public Member createCoach(@RequestBody Coach coach) {
-//        coachService.save(coach);
-//    }
 }

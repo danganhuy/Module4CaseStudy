@@ -64,7 +64,6 @@ public class SecurityConfiguration {
                                 .requestMatchers("/coach/**").hasRole("COACH")
                                 .requestMatchers("/player/**").hasRole("PLAYER")
                 )
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất cả request
                 .build();
     }
 

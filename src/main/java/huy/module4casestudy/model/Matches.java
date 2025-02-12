@@ -27,10 +27,10 @@ public class Matches {
     @JoinColumn(name = "team_id")
     private Team team;
 
-//    @Column(name = "coach_id", insertable = false, updatable = false)
-//    private Long coachId;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "coach_id")
-//    private Coach coach;
+    @Column(name = "coach_id", insertable = false, updatable = false)
+    private Long coachId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
 }

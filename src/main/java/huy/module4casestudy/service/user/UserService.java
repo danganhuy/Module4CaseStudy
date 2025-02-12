@@ -9,11 +9,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService, UserDetailsService {
     @Autowired
     private IUserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
@@ -31,13 +33,13 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
+    public Optional<User> findById(Long id) {
+        return Optional.empty();
     }
 
     @Override
-    public User save(User user) {
-        return null;
+    public void save(User user) {
+
     }
 
     @Override

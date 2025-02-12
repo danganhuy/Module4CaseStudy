@@ -1,9 +1,11 @@
 package huy.module4casestudy.model;
 
 
+import com.fasterxml.jackson.databind.BeanProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.awt.*;
 import java.time.LocalDate;
 
 
@@ -28,4 +30,6 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private EMemberType memberType;
+
 }
+

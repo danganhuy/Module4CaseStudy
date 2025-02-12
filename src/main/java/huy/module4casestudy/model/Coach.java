@@ -1,5 +1,7 @@
 package huy.module4casestudy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +15,7 @@ public class Coach {
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id")
+    @JsonManagedReference
     private Member member;
 
     @Column(name = "team_id", insertable = false, updatable = false)
@@ -20,5 +23,6 @@ public class Coach {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
 }

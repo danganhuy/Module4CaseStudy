@@ -1,12 +1,15 @@
 package huy.module4casestudy.model.composite;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import huy.module4casestudy.model.Member;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Data
 public class SalaryId implements Serializable {
     private Long id;
 
@@ -17,31 +20,8 @@ public class SalaryId implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id")
+    @JsonBackReference
     private Member member;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
 
     @Override
     public boolean equals(Object o) {

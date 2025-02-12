@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/matches")
+@RequestMapping("/admin/matches")
 @CrossOrigin("*")
 public class MatchesController {
 
@@ -45,11 +46,11 @@ public class MatchesController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMatches(@PathVariable Long id){
-        Matches matches = matchesService.findById(id);
+        Optional<Matches> matches = matchesService.findById(id);
         if(matches == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        matchesService.delete(matches);
+        matchesService.delete(matches.get());
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 }

@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("admin/team")
 @CrossOrigin("*")
 public class TeamController {
     private final ITeamService teamService;
@@ -37,11 +38,11 @@ public class TeamController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTeam(@PathVariable Long id){
-        Team team = teamService.findById(id);
+        Optional<Team> team = teamService.findById(id);
         if(team == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        teamService.delete(team);
+        teamService.delete(team.get());
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 }

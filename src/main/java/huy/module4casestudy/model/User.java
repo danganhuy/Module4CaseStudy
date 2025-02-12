@@ -20,7 +20,6 @@ public class User {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    @JsonManagedReference
     private Role role;
 
     private Boolean disabled;

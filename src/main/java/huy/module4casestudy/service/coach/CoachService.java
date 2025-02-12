@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CoachService implements ICoachService{
@@ -18,14 +19,13 @@ public class CoachService implements ICoachService{
     }
 
     @Override
-    public Coach findById(Long id) {
-        return iCoachRepository.findById(id).orElse(null);
+    public Optional<Coach> findById(Long id) {
+        return iCoachRepository.findById(id);
     }
 
     @Override
-    public Coach save(Coach coach) {
+    public void save(Coach coach) {
         iCoachRepository.save(coach);
-        return coach;
     }
 
     @Override

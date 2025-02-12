@@ -1,7 +1,8 @@
+
 function showAllMatches() {
     $.ajax({
         method: "GET",
-        url: "http://localhost:8080/matches",
+        url: "http://localhost:8080/admin/matches",
         success: function (data) {
             let content = "";
             for (let i = 0; i<data.length; i++){

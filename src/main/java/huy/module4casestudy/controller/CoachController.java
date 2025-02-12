@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/coach")
+@RequestMapping("admin/coach")
 @CrossOrigin("*")
 public class CoachController {
     private final ICoachService coachService;
@@ -38,11 +39,11 @@ public class CoachController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCoach(@PathVariable Long id){
-        Coach coach = coachService.findById(id);
+        Optional<Coach> coach = coachService.findById(id);
         if(coach == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        coachService.delete(coach);
+        coachService.delete(coach.get());
         return new ResponseEntity<>(coach, HttpStatus.OK);
     }
 }

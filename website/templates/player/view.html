@@ -55,18 +55,19 @@
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="table-dark">
-                <tr>
-                  <th>STT</th>
-                  <th>Họ và Tên</th>
-                  <th>Ngày Sinh</th>
-                  <th>Quốc tịch</th>
-                  <th>Quê quán</th>
-                  <th>Hanh Dong</th>
-                </tr>
-                </thead>
-                <tbody id="playerTableBody">
-                </tbody>
+                <h2>Chi tiết cầu thủ</h2>
+                <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
+                <p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>
+                <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
+                <p><strong>Quê quán:</strong> <span id="detailHometown"></span></p>
+                <p><strong>Loại Thành Viên:</strong> <span id="detailMemberType"></span></p>
+                <p><strong>Chiều cao:</strong> <span id="detailHeight"></span> m</p>
+                <p><strong>Cân nặng:</strong> <span id="detailWeight"></span> kg</p>
+                <p><strong>BMI:</strong> <span id="detailBmi"></span></p>
+                <p><strong>Xếp hạng:</strong> <span id="detailRanking"></span></p>
+
+                <button onclick="window.location.href='player.html'" class="btn btn-primary mt-3 px-4 py-2 rounded">Quay lại</button>
+                <button id="editPlayerBtn" class="btn btn-primary  mt-3 px-4 py-2 rounded">Chỉnh sửa</button>
               </table>
             </div>
           </div>
@@ -133,6 +134,51 @@
 <script src="../../static/js/demo/datatables-demo.js"></script>
 
 </body>
-<script src="player.js"></script>
+<div id="updatePlayerContainer" style="display: none; position: fixed;top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128,128,128,0.5)">
+  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h2>Cập nhật cầu thủ</h2>
+      <form id="updatePlayerForm">
+        <label for="fullName">Họ và tên:</label>
+        <input type="text" id="fullName" required><br>
+
+        <label for="dateOfBirth">Ngày sinh:</label>
+        <input type="date" id="dateOfBirth" required><br>
+
+        <label for="nationality">Quốc tịch:</label>
+        <input type="text" id="nationality" required><br>
+
+        <label for="hometown">Quê quán:</label>
+        <input type="text" id="hometown" required><br>
+
+        <label for="memberType">Loại Thành Viên:</label>
+        <select id="memberType" name="memberType" required>
+          <option value="COACH">Huấn luyện viên</option>
+          <option value="PLAYER">Cầu thủ</option>
+        </select><br>
+
+        <label for="height">Chiều cao (m):</label>
+        <input type="number" id="height" step="0.01" required><br>
+
+        <label for="weight">Cân nặng (kg):</label>
+        <input type="number" id="weight" step="0.1" required><br>
+
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" step="0.1" required readonly><br>
+
+        <label for="ranking">Xếp hạng:</label>
+        <input type="number" id="ranking" required><br>
+
+<!--        <label for="position">Vị trí:</label>-->
+<!--        <input type="text" id="position" required><br>-->
+
+<!--        <label for="team">Đội bóng:</label>-->
+<!--        <input type="text" id="team" required><br>-->
+
+        <button type="submit">Lưu thay đổi</button>
+        <button type="button" id="closeFormBtn">Đóng</button>
+      </form>
+  </div>
+</div>
+<script src="viewPlayer.js"></script>
 
 </html>

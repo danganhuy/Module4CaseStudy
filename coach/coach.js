@@ -14,6 +14,7 @@ $(document).ready(function() {
                         <td>${member.dateOfBirth}</td>
                         <td>${member.nationality}</td>
                         <td>${member.hometown}</td>
+                        <td><button onclick="viewDetail(${member.id})">Chi tiết</button></td>
                     </tr>`;
                 }
             });
@@ -24,3 +25,8 @@ $(document).ready(function() {
         }
     });
 });
+
+function viewDetail(id) {
+    window.location.href = `view.html?id=${id}`;
+}
+

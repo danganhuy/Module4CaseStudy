@@ -55,18 +55,19 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead class="table-dark">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Họ và Tên</th>
-                                    <th>Ngày Sinh</th>
-                                    <th>Quốc tịch</th>
-                                    <th>Quê quán</th>
-                                    <th>Hanh Dong</th>
-                                </tr>
-                                </thead>
-                                <tbody id="coachTableBody">
-                                </tbody>
+                                <h2 class="text-center">Chi Tiết Huấn Luyện Viên</h2>
+                                <div id="coachDetail" class="card p-3">
+                                    <p><strong>ID:</strong> <span id="coachId"></span></p>
+                                    <p><strong>Họ và Tên:</strong> <span id="coachName"></span></p>
+                                    <p><strong>Ngày Sinh:</strong> <span id="coachDob"></span></p>
+                                    <p><strong>Quốc tịch:</strong> <span id="coachNationality"></span></p>
+                                    <p><strong>Quê quán:</strong> <span id="coachHometown"></span></p>
+                                    <p><strong>Loại Thành Viên:</strong> <span id="coachType"></span></p>
+                                    <!--    <p><strong>Thuong:</strong> <span id="coachIncentive"></span></p>-->
+                                    <!--    <p><strong>Luong:</strong> <span id="coachSalary"></span></p>-->
+                                </div>
+                                <button onclick="window.location.href='coach.html'" class="btn btn-primary mt-3 px-4 py-2 rounded">Quay lại</button>
+                                <button id="editCoachBtn" class="btn btn-primary  mt-3 px-4 py-2 rounded">Chỉnh sửa</button>
                             </table>
                         </div>
                     </div>
@@ -133,6 +134,33 @@
 <script src="../../static/js/demo/datatables-demo.js"></script>
 
 </body>
-<script src="../../../coach/coach.js"></script>
+<div id="updateCoachContainer" style="display: none; position: fixed;top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128,128,128,0.5)">
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3>Cập Nhật Huấn Luyện Viên</h3>
+    <form id="updateCoachForm">
+        <label for="fullName">Họ và Tên:</label>
+        <input type="text" id="fullName" name="fullName" required><br>
+
+        <label for="dateOfBirth">Ngày Sinh:</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
+
+        <label for="nationality">Quốc tịch:</label>
+        <input type="text" id="nationality" name="nationality" required><br>
+
+        <label for="hometown">Quê quán:</label>
+        <input type="text" id="hometown" name="hometown" required><br>
+
+        <label for="memberType">Loại Thành Viên:</label>
+        <select id="memberType" name="memberType" required>
+            <option value="COACH">Huấn luyện viên</option>
+            <option value="PLAYER">Cầu thủ</option>
+        </select><br>
+
+        <button type="submit">Cập nhật</button>
+        <button type="button" id="closeFormBtn">Đóng</button>
+    </form>
+</div>
+</div>
+<script src="../../../coach/viewCoach.js"></script>
 
 </html>

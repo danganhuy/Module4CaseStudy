@@ -15,7 +15,7 @@ VALUES (2, 'Second team description', 'Team B');
 -- 3. Bảng member: 18 hàng
 -- Lưu ý: Chúng ta ép giá trị cho cột id (auto_increment) để đảm bảo các ID dùng cho các bảng khác.
 INSERT INTO member (id, date_of_birth, full_name, hometown, member_type, nationality)
-VALUES (1, '1980-01-01', 'Admin User', 'Hanoi', 'PLAYER', 'Vietnamese'), -- Admin (không tham gia bảng coach/player)
+VALUES (1, '1980-01-01', 'Admin User', 'Hanoi', NULL, 'Vietnamese'),
        (2, '1975-05-10', 'Coach One', 'Hanoi', 'COACH', 'Vietnamese'),
        (3, '1980-07-20', 'Coach Two', 'Hanoi', 'COACH', 'Vietnamese'),
        (4, '1995-02-15', 'Player 1', 'HCMC', 'PLAYER', 'Vietnamese'),

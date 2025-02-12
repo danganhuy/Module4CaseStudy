@@ -72,7 +72,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         auth -> auth
-                                //.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                                .requestMatchers("/**").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/api/login").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/coach/**").hasRole("COACH")

@@ -2,7 +2,7 @@ package huy.module4casestudy.service.user;
 
 import huy.module4casestudy.configuration.DTO.UserPrinciple;
 import huy.module4casestudy.model.User;
-import huy.module4casestudy.repository.UserRepository;
+import huy.module4casestudy.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserService implements IUserService, UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);

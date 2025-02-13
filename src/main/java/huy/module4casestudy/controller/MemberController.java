@@ -114,4 +114,35 @@ public class MemberController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("")
+    public ResponseEntity<?> createMember(@RequestBody MemberUpdateDTO newMemberDTO) {
+        // Tạo mới một Member từ DTO
+        Member member = new Member();
+        member.setFullName(newMemberDTO.getFullName());
+        member.setDateOfBirth(newMemberDTO.getDateOfBirth());
+        member.setNationality(newMemberDTO.getNationality());
+        member.setHometown(newMemberDTO.getHometown());
+        member.setMemberType(newMemberDTO.getMemberType());
+
+        // Lưu Member trước
+        member = memberRepository.save(member);
+
+        // Nếu là Player, tạo và lưu Player
+        if (newMemberDTO.getMemberType() == EMemberType.PLAYER) {
+            Player player = new Player();
+            player.setId(member.getId()); // Vì dùng @MapsId, ID của Player phải trùng với Member
+            player.setMember(member);
+            player.setHeight(newMemberDTO.getHeight());
+            player.setWeight(newMemberDTO.getWeight());
+            player.setBmi(newMemberDTO.getBmi());
+            player.setRanking(newMemberDTO.getRanking());
+
+            playerRepository.save(player);
+        }
+
+        return ResponseEntity.ok("Thêm mới thành viên thành công!");
+    }
+
 }
+

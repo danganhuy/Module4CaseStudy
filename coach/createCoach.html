@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Mới Thành Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Thêm Mới Thành Viên</h2>
+    <form id="memberForm">
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Họ và Tên</label>
+            <input type="text" class="form-control" id="fullName" required>
+        </div>
+        <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
+            <input type="date" class="form-control" id="dateOfBirth" required>
+        </div>
+        <div class="mb-3">
+            <label for="nationality" class="form-label">Quốc Tịch</label>
+            <input type="text" class="form-control" id="nationality" required>
+        </div>
+        <div class="mb-3">
+            <label for="hometown" class="form-label">Quê Quán</label>
+            <input type="text" class="form-control" id="hometown" required>
+        </div>
+        <div class="mb-3">
+            <label for="memberType" class="form-label">Loại Thành Viên</label>
+            <select class="form-select" id="memberType" required>
+                <option value="COACH">Huấn luyện viên</option>
+                <option value="PLAYER">Cầu Thủ</option>
+            </select>
+        </div>
+        <div id="playerFields" style="display: none;">
+            <div class="mb-3">
+                <label for="height" class="form-label">Chiều Cao (cm)</label>
+                <input type="number" class="form-control" id="height">
+            </div>
+            <div class="mb-3">
+                <label for="weight" class="form-label">Cân Nặng (kg)</label>
+                <input type="number" class="form-control" id="weight">
+            </div>
+            <div class="mb-3">
+                <label for="bmi" class="form-label">BMI</label>
+                <input type="number" step="0.1" class="form-control" id="bmi">
+            </div>
+            <div class="mb-3">
+                <label for="ranking" class="form-label">Xếp Hạng</label>
+                <input type="number" class="form-control" id="ranking">
+            </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="team" class="form-label">Đội Bóng</label>-->
+<!--                <input type="text" class="form-control" id="team">-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label for="position" class="form-label">Vị Trí Chơi</label>-->
+<!--                <input type="text" class="form-control" id="position">-->
+<!--            </div>-->
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm Thành Viên</button>
+    </form>
+</div>
+
+</body>
+<script src="createCoach.js"></script>
+</html>

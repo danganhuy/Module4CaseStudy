@@ -96,7 +96,32 @@
     <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="../static/js/sb-admin-2.min.js"></script>
-    
+
+    <script>
+        $(document).ready(function() {
+            $('#buttonLogin').click(function() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                $.ajax({
+                    url: 'http://localhost:8080/api/login',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ username: username, password: password }),
+                    success: function(response) {
+                        localStorage.setItem('token', response.token);
+                        localStorage.setItem('roles', JSON.stringify(response.roles));
+                        window.location.href = 'index.html';
+                    },
+                    error: function(error) {
+                        console.error('Error during login:', error);
+                        alert('Login failed!');
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="../static/myScript/login.js"></script>
 </body>
 

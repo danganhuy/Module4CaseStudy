@@ -108,18 +108,104 @@
                     <td>${data[i].name}</td>
                     <td>${data[i].date}</td>
                     <td>${data[i].location}</td>
-                    <td>${data[i].teamId}</td>
+                    <td><a href="#" onclick="fetchPlayersByTeam(${data[i].teamId})">${data[i].teamId}</a></td>
+
                     <td>${data[i].coachId}</td>
                     </tr>`;
-                    }
-                    document.getElementById("matchesTableBody").innerHTML = content
-                },
-                
-            });
-        }
-        
+
+                }
+                document.getElementById("matchesTableBody").innerHTML=content
+            },
+
+        });
+    }
+    showAllMatches();
+
+    $(document).ready(function() {
         showAllMatches();
-    </script>
+
+        $(document).on("click", ".team-link", function() {
+            let teamId = $(this).data("team-id");
+            fetchPlayersByTeam(teamId);
+        });
+    });
+
+    function fetchPlayersByTeam(teamId) {
+        let token = localStorage.getItem("token"); // Kiểm tra token có null không
+        if (!token) {
+            alert("Unauthorized request.");
+            return;
+        }
+
+        $.ajax({
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            url: `http://localhost:8080/admin/team/${teamId}/players`,
+            method: "GET",
+            dataType: "json", // Đảm bảo trả về JSON
+            success: function(players) {
+                console.log("Players Data:", players); // Kiểm tra JSON có đúng không
+
+                let content = "";
+                if (!players || players.length === 0) {
+                    content = "<tr><td colspan='3'>No players found in this team.</td></tr>";
+                } else {
+                    players.forEach(player => {
+                        let playerName = player.member && player.member.fullName ? player.member.fullName : "N/A";
+                        content += `
+                    <tr>
+                        <td>${player.id}</td>
+                        <td>${playerName}</td>
+                        <td>${player.ranking}</td>
+                    </tr>`;
+                    });
+                }
+
+                $("#playersTable tbody").empty().append(content); // Xóa dữ liệu cũ trước khi thêm mới
+                $("#playersModal").modal("show");
+            },
+            error: function(xhr) {
+                console.log("Error:", xhr.responseText);
+                alert("Failed to load players.");
+            }
+        });
+    }
+
+
+</script>
+
+<!-- Modal hiển thị danh sách cầu thủ -->
+<div class="modal fade" id="playersModal" tabindex="-1" role="dialog" aria-labelledby="playersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="playersModalLabel">Players in Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" id="playersTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Rank</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Player data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </body>
 
 </html>

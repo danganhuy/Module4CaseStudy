@@ -56,6 +56,7 @@
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <h2>Chi tiết cầu thủ</h2>
+                <img id="playerAvatar" src="" alt="Ảnh Cau Thu" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
                 <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
                 <p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>
                 <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
@@ -113,31 +114,17 @@
   </div>
 </div>
 
-<!-- Create sidebar topbar footer -->
-<script src="../../static/myScript/layout.js"></script>
-
-<!-- Bootstrap core JavaScript-->
-<script src="../../static/vendor/jquery/jquery.min.js"></script>
-<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../../static/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="../../static/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="../../static/js/demo/datatables-demo.js"></script>
-
-</body>
 <div id="updatePlayerContainer" style="display: none; position: fixed;top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128,128,128,0.5)">
   <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
     <h2>Cập nhật cầu thủ</h2>
     <form id="updatePlayerForm">
+      <!-- Ảnh đại diện -->
+      <div style="text-align: center;">
+        <img id="previewPlayerImage" src="default-avatar.jpg"
+             alt="Ảnh đại diện" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px;">
+        <input type="file" id="playerImage" name="image" accept="image/*">
+      </div>
+
       <label for="fullName">Họ và tên:</label>
       <input type="text" id="fullName" required><br>
 
@@ -168,17 +155,34 @@
       <label for="ranking">Xếp hạng:</label>
       <input type="number" id="ranking" required><br>
 
-      <!--        <label for="position">Vị trí:</label>-->
-      <!--        <input type="text" id="position" required><br>-->
-
-      <!--        <label for="team">Đội bóng:</label>-->
-      <!--        <input type="text" id="team" required><br>-->
-
       <button type="submit">Lưu thay đổi</button>
       <button type="button" id="closeFormBtn">Đóng</button>
     </form>
   </div>
 </div>
+
+<!-- Create sidebar topbar footer -->
+<script src="../../static/myScript/layout.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="../../static/vendor/jquery/jquery.min.js"></script>
+<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="../../static/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="../../static/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="../../static/js/demo/datatables-demo.js"></script>
+
+</body>
+
 <script src="view.js"></script>
 
 </html>

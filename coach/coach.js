@@ -13,16 +13,13 @@ $(document).ready(function() {
         paginatedData.forEach(function(coach) {
             tableBody += `<tr>
                 <td>${index++}</td>
-                <td><img src="http://localhost:8080/admin/files/${coach.fileName}" alt="Avatar" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px;"></td>
                 <td>${coach.fullName}</td>
                 <td>${coach.dateOfBirth}</td>
                 <td>${coach.nationality}</td>
                 <td>${coach.hometown}</td>
                 <td><button onclick="viewDetail(${coach.id})">Chi tiết</button></td>
-                <td><button onclick="deleteCoach(${coach.id})">Xoa</button></td>
             </tr>`;
         });
-
 
         $('#coachTableBody').html(tableBody);
         updateCoachPaginationButtons();
@@ -66,22 +63,5 @@ $(document).ready(function() {
 });
 
 function viewDetail(id) {
-    window.location.href = `view.html?id=${id}`;
-}
-
-function deleteCoach(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa huấn luyện viên này không?")) {
-        $.ajax({
-            url: `http://localhost:8080/api/members/${id}`,
-            type: 'DELETE',
-            success: function() {
-                alert("Xóa thành công!");
-                location.reload(); // Làm mới trang để cập nhật danh sách
-            },
-            error: function(xhr, status, error) {
-                console.error("Lỗi khi xóa huấn luyện viên:", error);
-                alert("Không thể xóa huấn luyện viên.");
-            }
-        });
-    }
+    window.location.href = `viewCoach.html?id=${id}`;
 }

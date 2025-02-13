@@ -17,7 +17,7 @@ public class Player {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     @JsonManagedReference
     private Member member;
 

@@ -1,10 +1,12 @@
 package huy.module4casestudy.service.player;
 
 import huy.module4casestudy.model.Player;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PlayerService implements IPlayerService {
 
     @Override

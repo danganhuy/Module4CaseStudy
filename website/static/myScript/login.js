@@ -15,7 +15,12 @@ function login() {
         data: JSON.stringify(user),
         success: function (data) {
             let token = JSON.parse(JSON.stringify(data)).token;
+            let username = JSON.parse(JSON.stringify(data)).username;
+            let role = JSON.parse(JSON.stringify(data)).authorities[0].authority;
+            localStorage.setItem("data", JSON.stringify(data))
             localStorage.setItem("token",token);
+            localStorage.setItem("username",username);
+            localStorage.setItem("role",role);
             window.location.href="index.html";
         },
         error: function (request, status, error) {

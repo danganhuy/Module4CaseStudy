@@ -17,23 +17,25 @@ public class PlayerService implements IPlayerService{
     public List<Player> getPlayersByTeamId(Long teamId) {
         return iPlayerRepository.findAllByTeamId(teamId);
     }
+
     @Override
     public List<Player> findAll() {
-        return List.of();
+        return playerRepository.findAll();
+
     }
 
     @Override
     public Optional<Player> findById(Long id) {
-        return Optional.empty();
+        return playerRepository.findById(id);
     }
 
     @Override
     public void save(Player player) {
-
+        playerRepository.save(player);
     }
 
     @Override
     public void delete(Player player) {
-
+        playerRepository.delete(player);
     }
 }

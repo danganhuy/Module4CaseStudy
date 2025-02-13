@@ -40,7 +40,7 @@ function createSidebar() {
         "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
         "                        <!--                        <h6 class=\"collapse-header\">Custom Components:</h6>-->\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Match</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +

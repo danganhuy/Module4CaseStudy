@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("admin/coach")
+@RequestMapping("/admin/coach")
 @CrossOrigin("*")
 public class CoachController {
     private final ICoachService coachService;

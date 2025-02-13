@@ -1,14 +1,24 @@
 package huy.module4casestudy.controller;
 
+import huy.module4casestudy.model.*;
+import huy.module4casestudy.model.DTO.MemberUpdateDTO;
 import huy.module4casestudy.service.coach.ICoachService;
+import huy.module4casestudy.service.matches.IMatchesService;
+import huy.module4casestudy.service.matchplayer.IMatchPlayerService;
 import huy.module4casestudy.service.member.IMemberService;
 import huy.module4casestudy.service.player.IPlayerService;
 import huy.module4casestudy.service.salary.ISalaryService;
 import huy.module4casestudy.service.team.ITeamService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/player")
@@ -24,4 +34,36 @@ public class PlayerAccountController {
     private ITeamService teamService;
     @Autowired
     private ICoachService coachService;
+    @Autowired
+    private IMatchPlayerService matchPlayerService;
+    @Autowired
+    private IMatchesService matchesService;
+
+    @GetMapping("/details")
+    public ResponseEntity<?> getPlayerDetails(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getAttribute("id").toString());
+        Member member = memberService.findById(id).get();
+        Player player = playerService.findById(id).get();
+        MemberUpdateDTO memberDetails = new MemberUpdateDTO(member, player);
+        return ResponseEntity.ok(memberDetails);
+    }
+
+    @GetMapping("/salaries")
+    public ResponseEntity<?> getSalaries(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getAttribute("id").toString());
+        List<Salary> salaries = salaryService.getSalariesById(id);
+        return ResponseEntity.ok(salaries);
+    }
+
+    @GetMapping("/matches")
+    public ResponseEntity<?> getMatches(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getAttribute("id").toString());
+        List<MatchPlayer> matchPlayers = matchPlayerService.findMatchesByPlayerId(id);
+        List<Matches> matches = matchesService.findAll();
+//        List<Matches> matches = new ArrayList<>();
+//        for (MatchPlayer matchPlayer : matchPlayers) {
+//            matches.add(matchesService.findById(matchPlayer.getId().getMatchId()).get());
+//        }
+        return ResponseEntity.ok(matches);
+    }
 }

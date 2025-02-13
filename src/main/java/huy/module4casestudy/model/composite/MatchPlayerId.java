@@ -1,7 +1,6 @@
 package huy.module4casestudy.model.composite;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import huy.module4casestudy.model.Matches;
 import huy.module4casestudy.model.Player;
 import jakarta.persistence.*;
@@ -25,11 +24,11 @@ public class MatchPlayerId implements Serializable {
     @JsonBackReference
     private Player player;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "match_id")
-    @JsonBackReference
-    private Matches matches;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @MapsId
+//    @JoinColumn(name = "match_id")
+//    @JsonBackReference
+//    private Matches matches;
 
     @Override
     public boolean equals(Object o) {

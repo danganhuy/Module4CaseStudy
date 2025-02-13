@@ -71,9 +71,9 @@ public class MemberController {
             memberRepository.save(member); // Lưu member trước
             playerRepository.save(player); // Sau đó lưu player
         } else {
-            // Nếu chuyển từ PLAYER sang COACH, xóa dữ liệu Player
-            playerRepository.deleteById(id);
-            memberRepository.save(member);
+//            playerRepository.deleteById(id);
+//            memberRepository.save(member);
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok("Cập nhật thành công!");

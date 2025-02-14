@@ -109,7 +109,7 @@ function createOptionForPlayer() {
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Bảng lương</span>\n" +
         "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"player/listMatches.html\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listMatches.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Lịch sử thi đấu</span>\n" +

@@ -14,6 +14,11 @@
   <option value="PLAYER">Cầu thủ</option>
   <option value="COACH">Huấn luyện viên</option>
 </select>
+<!-- Nút mở form thêm thành viên -->
+<button id="openAddMemberForm">Thêm thành viên</button>
+<label for="searchMember">Tìm kiếm thành viên:</label>
+<input type="text" id="searchMember" placeholder="Nhập tên thành viên...">
+<button id="btnSearchMember">Tìm kiếm</button>
 <table border="1">
   <thead>
   <tr>
@@ -35,8 +40,42 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  // $(document).ready(function () {
+  //   function loadMembers(filterType = "", searchQuery = "") {
+  //     $.ajax({
+  //       url: "http://localhost:8080/api/members",
+  //       type: "GET",
+  //       success: function (data) {
+  //         let tableBody = $("#memberTableBody");
+  //         tableBody.empty();
+  //
+  //         data.forEach(member => {
+  //           let nameMatch = member.fullName.toLowerCase().includes(searchQuery.toLowerCase());
+  //           let typeMatch = filterType === "" || member.memberType === filterType;
+  //           if (nameMatch && typeMatch) {
+  //             let row = `
+  //                       <tr>
+  //                           <td>${member.id}</td>
+  //                           <td>${member.fullName}</td>
+  //                           <td>${member.dateOfBirth}</td>
+  //                           <td>${member.nationality}</td>
+  //                           <td>${member.hometown}</td>
+  //                           <td>${member.memberType}</td>
+  //                           <td><a href="detail.html?id=${member.id}">Chi tiết</a></td>
+  //                           <td><a href="edit.html?id=${member.id}">Sửa</a></td>
+  //                       </tr>
+  //                   `;
+  //             tableBody.append(row);
+  //           }
+  //         });
+  //       }
+  //
+  //     });
+  //   }
+
   $(document).ready(function () {
-    function loadMembers(filterType = "") {
+    // Định nghĩa hàm loadMembers() trong phạm vi toàn cục
+    window.loadMembers = function (filterType = "", searchQuery = "") {
       $.ajax({
         url: "http://localhost:8080/api/members",
         type: "GET",
@@ -44,50 +83,73 @@
           let tableBody = $("#memberTableBody");
           tableBody.empty();
 
-          data.forEach(member => {
-            if (filterType === "" || member.memberType === filterType) {
-              let row = `
-                        <tr>
-                            <td>${member.id}</td>
-                            <td>${member.fullName}</td>
-                            <td>${member.dateOfBirth}</td>
-                            <td>${member.nationality}</td>
-                            <td>${member.hometown}</td>
-                            <td>${member.memberType}</td>
-                            <td><a href="detail.html?id=${member.id}">Chi tiết</a></td>
-                            <td><a href="edit.html?id=${member.id}">Sửa</a></td>
-                            <td><button onclick="deleteMember(${member.id})">Xóa</button></td>
-                        </tr>
-                    `;
-              tableBody.append(row);
-            }
+          let filteredData = data.filter(member => {
+            let nameMatch = searchQuery === "" || member.fullName.toLowerCase().includes(searchQuery.toLowerCase());
+            let typeMatch = filterType === "" || member.memberType === filterType;
+            return nameMatch && typeMatch;
           });
-        }
 
+          if (filteredData.length === 0) {
+            tableBody.append("<tr><td colspan='8' style='text-align: center;'>Không tìm thấy kết quả</td></tr>");
+          } else {
+            filteredData.forEach(member => {
+              let row = `
+              <tr>
+                <td>${member.id}</td>
+                <td>${member.fullName}</td>
+                <td>${member.dateOfBirth}</td>
+                <td>${member.nationality}</td>
+                <td>${member.hometown}</td>
+                <td>${member.memberType}</td>
+                <td><a href="detail.html?id=${member.id}">Chi tiết</a></td>
+                <td><a href="edit.html?id=${member.id}">Sửa</a></td>
+              </tr>
+            `;
+              tableBody.append(row);
+            });
+          }
+        },
+        error: function () {
+          alert("Lỗi khi tải danh sách thành viên!");
+        }
       });
-    }
+    };
 
     // Bắt sự kiện khi chọn dropdown để lọc danh sách
     $("#filterMemberType").change(function () {
       let selectedType = $(this).val();
-      loadMembers(selectedType);
+      let searchQuery = $("#searchMember").val().trim();
+      loadMembers(selectedType, searchQuery);
     });
 
-
-    function deleteMember(id) {
-      if (confirm("Bạn có chắc chắn muốn xóa?")) {
-        $.ajax({
-          url: `http://localhost:8080/api/members/${id}`,
-          type: "DELETE",
-          success: function () {
-            alert("Xóa thành công!");
-            loadMembers();
-          }
-        });
-      }
-    }
-
     loadMembers();
+  });
+  $(document).ready(function () {
+    $("#memberType").change(function () {
+      if ($(this).val() === "PLAYER") {
+        $("#playerFields").show();
+      } else {
+        $("#playerFields").hide();
+      }
+    });
+    $(document).ready(function () {
+      $("#openAddMemberForm").click(function () {
+        window.location.href = "add_member.html"; // Mở trang thêm thành viên
+      });
+    });
+    // Bắt sự kiện khi nhấn nút tìm kiếm
+    $("#btnSearchMember").click(function () {
+      let searchQuery = $("#searchMember").val().trim();
+      let selectedType = $("#filterMemberType").val();
+      loadMembers(selectedType, searchQuery);
+    });
+
+    // Bắt sự kiện khi chọn loại thành viên
+    $("#filterMemberType").change(function () {
+      let selectedType = $(this).val();
+      let searchQuery = $("#searchMember").val().trim();
+      loadMembers(selectedType, searchQuery);
+    });
   });
 </script>
 </body>

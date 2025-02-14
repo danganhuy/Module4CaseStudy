@@ -9,13 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PlayerService implements IPlayerService {
+public class PlayerService implements IPlayerService{
     @Autowired
     private IPlayerRepository playerRepository;
 
     @Override
+    public List<Player> getPlayersByTeamId(Long teamId) {
+        return playerRepository.findAllByTeamId(teamId);
+    }
+
+    @Override
     public List<Player> findAll() {
         return playerRepository.findAll();
+
     }
 
     @Override

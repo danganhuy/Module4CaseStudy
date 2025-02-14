@@ -107,7 +107,6 @@ $(document).ready(function () {
             formData.append("avatar", imageFile);
         }
 
-
         $.ajax({
             url: `http://localhost:8080/api/members/${playerId}/update`,
             type: 'PUT',

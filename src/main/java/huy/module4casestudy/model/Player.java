@@ -1,7 +1,6 @@
 package huy.module4casestudy.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import huy.module4casestudy.model.composite.EStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,14 +10,17 @@ import java.math.BigDecimal;
 @Entity
 @Data
 @Table(name = "player")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Player {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @MapsId
     @JoinColumn(name = "id", referencedColumnName = "id")
     @JsonManagedReference
+
     private Member member;
 
     @Column(precision = 5, scale = 2)

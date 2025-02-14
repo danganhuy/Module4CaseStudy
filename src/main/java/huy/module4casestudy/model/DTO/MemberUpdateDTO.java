@@ -4,6 +4,7 @@ import huy.module4casestudy.model.EMemberType;
 import huy.module4casestudy.model.Member;
 import huy.module4casestudy.model.Player;
 import huy.module4casestudy.model.composite.EStatus;
+
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ public class MemberUpdateDTO {
     private Integer ranking;
     private EStatus status;
     private Long teamId;
+
 
     public MemberUpdateDTO(Member member, Player player) {
         fullName = member.getFullName();

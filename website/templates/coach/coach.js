@@ -107,3 +107,7 @@ function viewDetail(id) {
     window.location.href = `viewCoach.html?id=${id}`;
 }
 
+function create() {
+    window.location.href = '../admin/create.html';
+}
+

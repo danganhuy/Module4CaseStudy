@@ -106,3 +106,6 @@ $(document).ready(function() {
 function viewDetail(id) {
     window.location.href = `viewPlayer.html?id=${id}`;
 }
+function create() {
+    window.location.href = '../admin/create.html';
+}

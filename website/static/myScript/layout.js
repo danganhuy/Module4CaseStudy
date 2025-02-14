@@ -4,7 +4,7 @@ function createSidebar() {
         "            <ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">\n" +
         "            \n" +
         "            <!-- Sidebar - Brand -->\n" +
-        "            <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"index.html\">\n" +
+        "            <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"../admin/index.html\">\n" +
         "                <div class=\"sidebar-brand-icon rotate-n-15\">\n" +
         "                    <i class=\"fas fa-laugh-wink\"></i>\n" +
         "                </div>\n" +
@@ -39,10 +39,10 @@ function createSidebar() {
         "                <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n" +
         "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
         "                        <!--                        <h6 class=\"collapse-header\">Custom Components:</h6>-->\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"../coach/coach.html\">Coach</a>\n" +
         "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"../player/player.html\">Player</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Team</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">User</a>\n" +

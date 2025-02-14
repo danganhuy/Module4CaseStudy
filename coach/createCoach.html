@@ -9,7 +9,12 @@
 <body>
 <div class="container mt-5">
     <h2>Thêm Mới Thành Viên</h2>
-    <form id="memberForm">
+    <form id="createForm">
+        <div class="mb-3">
+            <img id="avatarPreview" src="" alt="Ảnh xem trước" class="img-thumbnail mt-2" style="max-width: 150px; display: none;">
+            <label for="avatar" class="form-label">Ảnh Đại Diện</label>
+            <input type="file" class="form-control" id="avatar" accept="image/*">
+        </div>
         <div class="mb-3">
             <label for="fullName" class="form-label">Họ và Tên</label>
             <input type="text" class="form-control" id="fullName" required>
@@ -50,19 +55,12 @@
                 <label for="ranking" class="form-label">Xếp Hạng</label>
                 <input type="number" class="form-control" id="ranking">
             </div>
-<!--            <div class="mb-3">-->
-<!--                <label for="team" class="form-label">Đội Bóng</label>-->
-<!--                <input type="text" class="form-control" id="team">-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="position" class="form-label">Vị Trí Chơi</label>-->
-<!--                <input type="text" class="form-control" id="position">-->
-<!--            </div>-->
         </div>
         <button type="submit" class="btn btn-primary">Thêm Thành Viên</button>
     </form>
 </div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="createCoach.js"></script>
 </html>

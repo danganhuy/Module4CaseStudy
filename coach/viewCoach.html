@@ -5,12 +5,14 @@
   <title>Chi Tiết Huấn Luyện Viên</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="../website/templates/coach/viewCoach.js"></script>
+  <script src="viewCoach.js"></script>
 </head>
 <body>
 <div class="container mt-4">
   <h2 class="text-center">Chi Tiết Huấn Luyện Viên</h2>
   <div id="coachDetail" class="card p-3">
+    <p><strong>Ảnh Đại Diện:</strong></p>
+    <img id="coachAvatar" src="" alt="Ảnh Huấn Luyện Viên" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
     <p><strong>ID:</strong> <span id="coachId"></span></p>
     <p><strong>Họ và Tên:</strong> <span id="coachName"></span></p>
     <p><strong>Ngày Sinh:</strong> <span id="coachDob"></span></p>
@@ -25,98 +27,36 @@
 </div>
 <button id="editCoachBtn">Chỉnh sửa Huấn Luyện Viên</button>
 
-<div id="updateCoachContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-  <h3>Cập Nhật Huấn Luyện Viên</h3>
-  <form id="updateCoachForm">
-    <label for="fullName">Họ và Tên:</label>
-    <input type="text" id="fullName" name="fullName" required><br>
+<div id="updateCoachContainer" style="display: none; position: fixed;top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128,128,128,0.5)">
+  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3>Cập Nhật Huấn Luyện Viên</h3>
+    <form id="updateCoachForm">
+      <label for="avatar">Ảnh Đại Diện:</label>
+      <input type="file" id="avatar" name="avatar" accept="image/*"><br>
 
-    <label for="dateOfBirth">Ngày Sinh:</label>
-    <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
+      <label for="fullName">Họ và Tên:</label>
+      <input type="text" id="fullName" name="fullName" required><br>
 
-    <label for="nationality">Quốc tịch:</label>
-    <input type="text" id="nationality" name="nationality" required><br>
+      <label for="dateOfBirth">Ngày Sinh:</label>
+      <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
 
-    <label for="hometown">Quê quán:</label>
-    <input type="text" id="hometown" name="hometown" required><br>
+      <label for="nationality">Quốc tịch:</label>
+      <input type="text" id="nationality" name="nationality" required><br>
 
-    <label for="memberType">Loại Thành Viên:</label>
-    <select id="memberType" name="memberType" required>
-      <option value="COACH">Huấn luyện viên</option>
-      <option value="PLAYER">Cầu thủ</option>
-    </select><br>
+      <label for="hometown">Quê quán:</label>
+      <input type="text" id="hometown" name="hometown" required><br>
 
-    <button type="submit">Cập nhật</button>
-    <button type="button" id="closeFormBtn">Đóng</button>
-  </form>
+      <label for="memberType">Loại Thành Viên:</label>
+      <select id="memberType" name="memberType" required>
+        <option value="COACH">Huấn luyện viên</option>
+        <option value="PLAYER">Cầu thủ</option>
+      </select><br>
+
+      <button type="submit">Cập nhật</button>
+      <button type="button" id="closeFormBtn">Đóng</button>
+    </form>
+  </div>
 </div>
-
-<script>
-  $(document).ready(function () {
-    // Hiển thị form khi nhấn nút
-    $('#editCoachBtn').click(function () {
-      $('#updateCoachContainer').fadeIn();
-    });
-
-    // Ẩn form khi nhấn nút đóng
-    $('#closeFormBtn').click(function () {
-      $('#updateCoachContainer').fadeOut();
-    });
-
-    // Lấy ID từ URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-
-    if (id) {
-      // Load dữ liệu huấn luyện viên vào form
-      $.ajax({
-        url: `http://localhost:8080/api/members/${id}`,
-        type: 'GET',
-        dataType: 'json',
-        success: function (member) {
-          $('#fullName').val(member.fullName);
-          $('#dateOfBirth').val(member.dateOfBirth);
-          $('#nationality').val(member.nationality);
-          $('#hometown').val(member.hometown);
-          $('#memberType').val(member.memberType);
-        },
-        error: function (xhr, status, error) {
-          console.error('Lỗi khi lấy dữ liệu huấn luyện viên:', error);
-          alert('Không thể tải dữ liệu huấn luyện viên.');
-        }
-      });
-    }
-
-    // Xử lý sự kiện cập nhật
-    $('#updateCoachForm').submit(function (event) {
-      event.preventDefault();
-
-      const updatedCoach = {
-        fullName: $('#fullName').val(),
-        dateOfBirth: $('#dateOfBirth').val(),
-        nationality: $('#nationality').val(),
-        hometown: $('#hometown').val(),
-        memberType: $('#memberType').val()
-      };
-
-      $.ajax({
-        url: `http://localhost:8080/api/members/${id}`,
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(updatedCoach),
-        success: function () {
-          alert('Cập nhật thành công!');
-          $('#updateCoachContainer').fadeOut();
-          window.location.href = 'coach.html'; // Chuyển về danh sách
-        },
-        error: function (xhr, status, error) {
-          console.error('Lỗi khi cập nhật huấn luyện viên:', error);
-          alert('Không thể cập nhật dữ liệu.');
-        }
-      });
-    });
-  });
-</script>
 
 </body>
 </html>

@@ -3,17 +3,18 @@ $(document).ready(function () {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        url: `http://localhost:8080/player/salaries`,
+        url: `http://localhost:8080/player/matches`,
         type: "GET",
         success: function (data) {
             let s = "";
 
-            for (let salary of data) {
+            for (let match of data) {
                 s += `<tr>`
-                s += `<td>${salary.id.month}</td>`
-                s += `<td>${salary.id.year}</td>`
-                s += `<td>${salary.salary}</td>`
-                s += `<td>${salary.incentive}</td>`
+                s += `<td>${match.name}</td>`
+                s += `<td>${match.date}</td>`
+                s += `<td>${match.location}</td>`
+                s += `<td>${match.performanceRating}</td>`
+                s += `<td>${match.review}</td>`
                 s += `</tr>`
             }
 

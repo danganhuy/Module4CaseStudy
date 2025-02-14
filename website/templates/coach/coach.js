@@ -104,22 +104,6 @@ $(document).ready(function() {
 });
 
 function viewDetail(id) {
-    window.location.href = `view.html?id=${id}`;
+    window.location.href = `viewCoach.html?id=${id}`;
 }
 
-function deleteCoach(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa huấn luyện viên này không?")) {
-        $.ajax({
-            url: `http://localhost:8080/api/members/${id}`,
-            type: 'DELETE',
-            success: function() {
-                alert("Xóa thành công!");
-                loadMembers(); // Cập nhật danh sách sau khi xóa
-            },
-            error: function(xhr, status, error) {
-                console.error("Lỗi khi xóa huấn luyện viên:", error);
-                alert("Không thể xóa huấn luyện viên.");
-            }
-        });
-    }
-}

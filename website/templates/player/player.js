@@ -104,5 +104,5 @@ $(document).ready(function() {
 });
 
 function viewDetail(id) {
-    window.location.href = `view.html?id=${id}`;
+    window.location.href = `viewPlayer.html?id=${id}`;
 }

@@ -1,8 +1,10 @@
 package huy.module4casestudy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,6 +27,7 @@ public class Matches {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
 
     @Column(name = "coach_id", insertable = false, updatable = false)
@@ -32,5 +35,6 @@ public class Matches {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coach_id")
+    @JsonBackReference
     private Coach coach;
 }

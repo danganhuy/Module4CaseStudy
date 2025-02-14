@@ -81,6 +81,7 @@ $(document).ready(function () {
             bmi: $('#bmi').val(),
             ranking: $('#ranking').val()
         };
+        console.log(JSON.stringify(updatedPlayer))
 
         $.ajax({
             url: `http://localhost:8080/api/members/${playerId}`,

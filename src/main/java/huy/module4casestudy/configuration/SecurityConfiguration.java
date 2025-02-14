@@ -36,15 +36,18 @@ public class SecurityConfiguration {
     public JdbcUserDetailsManager userDetailsService(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
+
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
 //        return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -52,19 +55,19 @@ public class SecurityConfiguration {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/api/login").permitAll()
+                                .requestMatchers("/**").permitAll()                        
+                                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/coach/**").hasRole("COACH")
                                 .requestMatchers("/player/**").hasRole("PLAYER")
                 )
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất cả request
                 .build();
     }
 

@@ -40,7 +40,7 @@ function createSidebar() {
         "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
         "                        <!--                        <h6 class=\"collapse-header\">Custom Components:</h6>-->\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Match</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
@@ -103,7 +103,7 @@ function createTopbar() {
         "                                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
         "                                    <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">Douglas McGee</span>\n" +
         "                                    <img class=\"img-profile rounded-circle\"\n" +
-        "                                         src=\"../static/img/undraw_profile.svg\">\n" +
+        "                                         src=\"../../static/img/undraw_profile.svg\">\n" +
         "                                </a>\n" +
         "                                <!-- Dropdown - User Information -->\n" +
         "                                <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\"\n" +

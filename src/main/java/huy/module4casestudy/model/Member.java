@@ -1,11 +1,8 @@
 package huy.module4casestudy.model;
 
-
-import com.fasterxml.jackson.databind.BeanProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.awt.*;
 import java.time.LocalDate;
 
 
@@ -17,7 +14,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_name", length = 255)
+    @Column(length = 255)
     private String fullName;
 
     private LocalDate dateOfBirth;
@@ -31,5 +28,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private EMemberType memberType;
 
+    @Column(length = 255)
+    private String fileName;
 }
 

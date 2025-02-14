@@ -1,13 +1,16 @@
 package huy.module4casestudy.model.composite;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import huy.module4casestudy.model.Matches;
 import huy.module4casestudy.model.Player;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Data
 public class MatchPlayerId implements Serializable {
     @Column(name = "player_id")
     private Long playerId;
@@ -18,28 +21,14 @@ public class MatchPlayerId implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "player_id")
+    @JsonBackReference
     private Player player;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "match_id")
+    @JsonBackReference
     private Matches matches;
-
-    public Long getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(Long playerId) {
-        this.playerId = playerId;
-    }
-
-    public Long getMatchId() {
-        return matchId;
-    }
-
-    public void setMatchId(Long matchId) {
-        this.matchId = matchId;
-    }
 
     @Override
     public boolean equals(Object o) {

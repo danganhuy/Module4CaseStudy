@@ -1,7 +1,8 @@
 package huy.module4casestudy.service.member;
 
 import huy.module4casestudy.model.Member;
-import huy.module4casestudy.service.IGenerateService;
+import huy.module4casestudy.service.IGenericService;
 
-public interface IMemberService extends IGenerateService<Member> {
+public interface IMemberService extends IGenericService<Member> {
+    void deleteById(Long id);
 }

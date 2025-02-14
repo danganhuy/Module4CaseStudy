@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm thành viên</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h2>Thêm thành viên mới</h2>
+
+<form id="addMemberForm">
+    <label for="fullName">Họ và tên:</label>
+    <input type="text" id="fullName" required><br>
+
+    <label for="dateOfBirth">Ngày sinh:</label>
+    <input type="date" id="dateOfBirth" required><br>
+
+    <label for="nationality">Quốc tịch:</label>
+    <input type="text" id="nationality" required><br>
+
+    <label for="hometown">Quê quán:</label>
+    <input type="text" id="hometown" required><br>
+
+    <label for="memberType">Loại thành viên:</label>
+    <select id="memberType" required>
+        <option value="PLAYER">Cầu thủ</option>
+        <option value="COACH">Huấn luyện viên</option>
+    </select><br>
+
+    <div id="playerFields" style="display: none;">
+        <label for="height">Chiều cao (m):</label>
+        <input type="number" id="height" step="0.01"><br>
+
+        <label for="weight">Cân nặng (kg):</label>
+        <input type="number" id="weight" step="0.01"><br>
+
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" step="0.01"><br>
+
+        <label for="ranking">Xếp hạng:</label>
+        <input type="number" id="ranking"><br>
+    </div>
+
+    <button type="submit">Thêm</button>
+    <button type="button" onclick="window.location.href='membertest.html'">Hủy</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#memberType").change(function () {
+            if ($(this).val() === "PLAYER") {
+                $("#playerFields").show();
+            } else {
+                $("#playerFields").hide();
+            }
+        });
+
+        $("#addMemberForm").submit(function (event) {
+            event.preventDefault();
+
+            let newMember = {
+                fullName: $("#fullName").val(),
+                dateOfBirth: $("#dateOfBirth").val(),
+                nationality: $("#nationality").val(),
+                hometown: $("#hometown").val(),
+                memberType: $("#memberType").val()
+            };
+
+            if (newMember.memberType === "PLAYER") {
+                newMember.height = $("#height").val() || 0;
+                newMember.weight = $("#weight").val() || 0;
+                newMember.bmi = $("#bmi").val() || 0;
+                newMember.ranking = $("#ranking").val() || 0;
+            }
+
+            console.log("Dữ liệu gửi lên:", JSON.stringify(newMember, null, 2)); // Debug dữ liệu trước khi gửi
+
+            $.ajax({
+                url: "http://localhost:8080/api/members",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(newMember),
+                success: function () {
+                    alert("Thêm thành viên thành công!");
+                    window.location.href = "membertest.html";
+                    // window.opener.loadMembers(); // Gọi hàm cập nhật danh sách bên `membertest.html`
+                    // window.close();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi:", xhr.responseText);
+                    alert("Có lỗi xảy ra khi thêm thành viên!");
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

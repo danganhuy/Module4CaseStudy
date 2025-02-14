@@ -7,6 +7,7 @@ import huy.module4casestudy.repository.IPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class MemberService implements IMemberService {
@@ -17,7 +18,7 @@ public class MemberService implements IMemberService {
     private IPlayerRepository playerRepository;
 
     @Override
-    public Iterable<Member> findAll() {
+    public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
@@ -30,6 +31,11 @@ public class MemberService implements IMemberService {
     @Override
     public void save(Member member) {
         memberRepository.save(member);
+    }
+
+    @Override
+    public void delete(Member member) {
+
     }
 
     @Override

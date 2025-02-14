@@ -63,7 +63,7 @@ function createOptionForAdmin() {
         "                <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n" +
         "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"#\">Match</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
         "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
@@ -75,7 +75,29 @@ function createOptionForAdmin() {
 }
 
 function createOptionForCoach() {
-
+    return "" +
+        "            <li class=\"nav-item\">\n" +
+        "                <a class=\"nav-link collapsed\" href=\"index.html\"\n" +
+        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
+        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
+        "                    <span>Thông tin cá nhân</span>\n" +
+        "                </a>\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listSalary.html\"\n" +
+        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
+        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
+        "                    <span>Bảng lương</span>\n" +
+        "                </a>\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listMatches.html\"\n" +
+        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
+        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
+        "                    <span>Lịch sử thi đấu</span>\n" +
+        "                </a>\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listPlayer.html\"\n" +
+        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
+        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
+        "                    <span>Thành viên đội bóng</span>\n" +
+        "                </a>\n" +
+        "            </li>\n";
 }
 
 function createOptionForPlayer() {

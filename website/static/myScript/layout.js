@@ -103,7 +103,7 @@ function createTopbar() {
         "                                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
         "                                    <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">Douglas McGee</span>\n" +
         "                                    <img class=\"img-profile rounded-circle\"\n" +
-        "                                         src=\"../static/img/undraw_profile.svg\">\n" +
+        "                                         src=\"../../static/img/undraw_profile.svg\">\n" +
         "                                </a>\n" +
         "                                <!-- Dropdown - User Information -->\n" +
         "                                <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\"\n" +

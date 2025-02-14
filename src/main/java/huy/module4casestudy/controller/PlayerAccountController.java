@@ -1,14 +1,13 @@
 package huy.module4casestudy.controller;
 
 import huy.module4casestudy.model.*;
+import huy.module4casestudy.model.DTO.MatchPlayerDTO;
 import huy.module4casestudy.model.DTO.MemberUpdateDTO;
-import huy.module4casestudy.service.coach.ICoachService;
 import huy.module4casestudy.service.matches.IMatchesService;
 import huy.module4casestudy.service.matchplayer.IMatchPlayerService;
 import huy.module4casestudy.service.member.IMemberService;
 import huy.module4casestudy.service.player.IPlayerService;
 import huy.module4casestudy.service.salary.ISalaryService;
-import huy.module4casestudy.service.team.ITeamService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +29,6 @@ public class PlayerAccountController {
     private IPlayerService playerService;
     @Autowired
     private ISalaryService salaryService;
-    @Autowired
-    private ITeamService teamService;
-    @Autowired
-    private ICoachService coachService;
     @Autowired
     private IMatchPlayerService matchPlayerService;
     @Autowired
@@ -59,11 +54,11 @@ public class PlayerAccountController {
     public ResponseEntity<?> getMatches(HttpServletRequest request) {
         Long id = Long.parseLong(request.getAttribute("id").toString());
         List<MatchPlayer> matchPlayers = matchPlayerService.findMatchesByPlayerId(id);
-        List<Matches> matches = matchesService.findAll();
-//        List<Matches> matches = new ArrayList<>();
-//        for (MatchPlayer matchPlayer : matchPlayers) {
-//            matches.add(matchesService.findById(matchPlayer.getId().getMatchId()).get());
-//        }
+//        List<Matches> matches = matchesService.findAll();
+        List<MatchPlayerDTO> matches = new ArrayList<>();
+        for (MatchPlayer matchPlayer : matchPlayers) {
+            matches.add(new MatchPlayerDTO(matchPlayer.getId().getMatches(), matchPlayer));
+        }
         return ResponseEntity.ok(matches);
     }
 }

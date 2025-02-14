@@ -24,11 +24,11 @@ public class MatchPlayerId implements Serializable {
     @JsonBackReference
     private Player player;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId
-//    @JoinColumn(name = "match_id")
-//    @JsonBackReference
-//    private Matches matches;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "match_id")
+    @JsonBackReference
+    private Matches matches;
 
     @Override
     public boolean equals(Object o) {

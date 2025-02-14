@@ -24,10 +24,8 @@ function login() {
             window.location.href="index.html";
         },
         error: function (request, status, error) {
-            document.getElementById("error_message").innerText = "Incorrect username or password";
-            console.log(request);
-            console.log(status);
-            console.log(error);
+            // document.getElementById("error_message").innerText = "Incorrect username or password";
+            alert("Incorrect username or password");
         }
     })
 }

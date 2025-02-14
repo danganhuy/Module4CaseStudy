@@ -4,7 +4,7 @@ function createSidebar() {
         "            <ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">\n" +
         "            \n" +
         "            <!-- Sidebar - Brand -->\n" +
-        "            <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"index.html\">\n" +
+        "            <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"../admin/index.html\">\n" +
         "                <div class=\"sidebar-brand-icon rotate-n-15\">\n" +
         "                    <i class=\"fas fa-laugh-wink\"></i>\n" +
         "                </div>\n" +
@@ -16,7 +16,7 @@ function createSidebar() {
         "            \n" +
         "            <!-- Nav Item - Dashboard -->\n" +
         "            <li class=\"nav-item active\">\n" +
-        "                <a class=\"nav-link\" href=\"index.html\">\n" +
+        "                <a class=\"nav-link\" href=\"../admin/index.html\">\n" +
         "                    <i class=\"fas fa-fw fa-tachometer-alt\"></i>\n" +
         "                    <span>Dashboard</span></a>\n" +
         "            </li>\n" +
@@ -62,13 +62,9 @@ function createOptionForAdmin() {
         "                </a>\n" +
         "                <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n" +
         "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Match</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Team</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">User</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"../coach/coach.html\">Coach</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"../player/listMatches.html\">Match</a>\n" +
+        "                        <a class=\"collapse-item\" href=\"../player/player.html\">Player</a>\n" +
         "                    </div>\n" +
         "                </div>\n" +
         "            </li>\n";
@@ -87,7 +83,7 @@ function createOptionForCoach() {
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Bảng lương</span>\n" +
         "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"listMatches.html\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"player/listMatches.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Lịch sử thi đấu</span>\n" +
@@ -113,7 +109,7 @@ function createOptionForPlayer() {
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Bảng lương</span>\n" +
         "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"listMatches.html\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"player/listMatches.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Lịch sử thi đấu</span>\n" +

@@ -17,11 +17,6 @@ $(document).ready(function () {
                 $("#detailWeight").text(data.weight);
                 $("#detailBmi").text(data.bmi);
                 $("#detailRanking").text(data.ranking);
-                if (data.fileName) {
-                    $("#playerAvatar").attr("src", `http://localhost:8080/admin/files/${data.fileName}`);
-                } else {
-                    $("#playerAvatar").attr("src", "default-avatar.jpg"); // Ảnh mặc định
-                }
             }
         });
 
@@ -41,11 +36,6 @@ $(document).ready(function () {
                     $('#weight').val(data.weight);
                     $('#bmi').val(data.bmi);
                     $('#ranking').val(data.ranking);
-                }
-                if (data.fileName) {
-                    $("#previewPlayerImage").attr("src", `http://localhost:8080/admin/files/${data.fileName}`);
-                } else {
-                    $("#previewPlayerImage").attr("src", "default-avatar.jpg"); // Ảnh mặc định
                 }
             },
             error: function (xhr, status, error) {
@@ -67,7 +57,7 @@ $(document).ready(function () {
 
     // Tự động tính BMI khi thay đổi chiều cao hoặc cân nặng
     function calculateBMI() {
-        let height = parseFloat($('#height').val())/100;
+        let height = parseFloat($('#height').val());
         let weight = parseFloat($('#weight').val());
         if (height > 0 && weight > 0) {
             let bmi = (weight / (height * height)).toFixed(2);
@@ -77,46 +67,31 @@ $(document).ready(function () {
 
     $('#height, #weight').on('input', calculateBMI);
 
-    // Xem trước ảnh khi chọn file mới
-    $("#playerImage").change(function (event) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $("#previewPlayerImage").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    });
-
     // Xử lý sự kiện cập nhật
     $('#updatePlayerForm').submit(function (event) {
         event.preventDefault();
 
-        calculateBMI();
-
-        let formData = new FormData();
-        formData.append("fullName", $('#fullName').val());
-        formData.append("dateOfBirth", $('#dateOfBirth').val());
-        formData.append("nationality", $('#nationality').val());
-        formData.append("hometown", $('#hometown').val());
-        formData.append("height", $('#height').val());
-        formData.append("weight", $('#weight').val());
-        formData.append("bmi", $('#bmi').val());
-        formData.append("ranking", $('#ranking').val());
-
-        let imageFile = $("#playerImage")[0].files[0];
-        if (imageFile) {
-            formData.append("avatar", imageFile);
-        }
+        const updatedPlayer = {
+            fullName: $('#fullName').val(),
+            dateOfBirth: $('#dateOfBirth').val(),
+            nationality: $('#nationality').val(),
+            hometown: $('#hometown').val(),
+            height: $('#height').val(),
+            weight: $('#weight').val(),
+            bmi: $('#bmi').val(),
+            ranking: $('#ranking').val()
+        };
+        console.log(JSON.stringify(updatedPlayer))
 
         $.ajax({
-            url: `http://localhost:8080/api/members/${playerId}/update`,
+            url: `http://localhost:8080/api/members/${playerId}`,
             type: 'PUT',
-            contentType: false,
-            processData: false,
-            data: formData,
+            contentType: 'application/json',
+            data: JSON.stringify(updatedPlayer),
             success: function () {
                 alert('Cập nhật thành công!');
                 $('#updatePlayerContainer').fadeOut();
-                location.reload();
+                window.location.href = 'playerlist.html'; // Chuyển về danh sách cầu thủ
             },
             error: function (xhr, status, error) {
                 console.error('Lỗi khi cập nhật cầu thủ:', error);

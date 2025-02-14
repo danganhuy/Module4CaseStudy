@@ -60,57 +60,6 @@ function createSidebar() {
         "        </ul>" + sidebar.innerHTML;
 }
 
-function createOption() {
-
-}
-
-function createOptionForAdmin() {
-    return "" +
-        "            <li class=\"nav-item\">\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
-        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
-        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
-        "                    <span>Table</span>\n" +
-        "                </a>\n" +
-        "                <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n" +
-        "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Team</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">User</a>\n" +
-        "                    </div>\n" +
-        "                </div>\n" +
-        "            </li>\n";
-}
-
-function createOptionForCoach() {
-
-}
-
-function createOptionForPlayer() {
-    return "" +
-        "            <li class=\"nav-item\">\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
-        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
-        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
-        "                    <span>Thông tin cá nhân</span>\n" +
-        "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
-        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
-        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
-        "                    <span>Bảng lương</span>\n" +
-        "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
-        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
-        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
-        "                    <span>Lịch sử thi đấu</span>\n" +
-        "                </a>\n" +
-        "            </li>\n";
-}
-
 function createTopbar() {
     let topbar = document.getElementById("content");
     topbar.innerHTML = "\n" +
@@ -152,7 +101,7 @@ function createTopbar() {
         "                            <li class=\"nav-item dropdown no-arrow\">\n" +
         "                                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"\n" +
         "                                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-        `                                    <span class="mr-2 d-none d-lg-inline text-gray-600">${localStorage.getItem("username")}</span>\n` +
+        "                                    <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">Douglas McGee</span>\n" +
         "                                    <img class=\"img-profile rounded-circle\"\n" +
         "                                         src=\"../../static/img/undraw_profile.svg\">\n" +
         "                                </a>\n" +

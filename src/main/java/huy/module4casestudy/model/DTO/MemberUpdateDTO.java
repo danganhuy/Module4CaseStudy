@@ -17,10 +17,10 @@ public class MemberUpdateDTO {
     private EMemberType memberType;
 
     // Dữ liệu của Player (chỉ khi memberType là PLAYER)
-    private BigDecimal height;
-    private BigDecimal weight;
-    private BigDecimal bmi;
-    private Integer ranking;
+    private BigDecimal height ;
+    private BigDecimal weight ;
+    private BigDecimal bmi ;
+    private Integer ranking ;
 }
 
 

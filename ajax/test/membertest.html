@@ -14,6 +14,8 @@
   <option value="PLAYER">Cầu thủ</option>
   <option value="COACH">Huấn luyện viên</option>
 </select>
+<!-- Nút mở form thêm thành viên -->
+<button id="openAddMemberForm">Thêm thành viên</button>
 <table border="1">
   <thead>
   <tr>
@@ -88,6 +90,21 @@
     }
 
     loadMembers();
+  });
+  $(document).ready(function () {
+    $("#memberType").change(function () {
+      if ($(this).val() === "PLAYER") {
+        $("#playerFields").show();
+      } else {
+        $("#playerFields").hide();
+      }
+    });
+    $(document).ready(function () {
+      $("#openAddMemberForm").click(function () {
+        window.location.href = "add_member.html"; // Mở trang thêm thành viên
+      });
+    });
+
   });
 </script>
 </body>

@@ -18,9 +18,8 @@ public class Player {
 
     @OneToOne(fetch = FetchType.EAGER)
     @MapsId
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    @JsonManagedReference
-
+    @JoinColumn(name = "id")
+    //@JsonManagedReference
     private Member member;
 
     @Column(precision = 5, scale = 2)

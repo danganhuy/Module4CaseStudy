@@ -21,19 +21,10 @@ function login() {
             localStorage.setItem("token",token);
             localStorage.setItem("username",username);
             localStorage.setItem("role",role);
-            switch (role) {
-                case "ROLE_ADMIN":
-                    window.location.href="../admin/index.html";
-                    break;
-                case "ROLE_COACH":
-                    window.location.href="../coachaccount/index.html";
-                    break;
-                case "ROLE_PLAYER":
-                    window.location.href="../playeraccount/index.html";
-                    break;
-            }
+            window.location.href="index.html";
         },
         error: function (request, status, error) {
+            // document.getElementById("error_message").innerText = "Incorrect username or password";
             alert("Incorrect username or password");
         }
     })

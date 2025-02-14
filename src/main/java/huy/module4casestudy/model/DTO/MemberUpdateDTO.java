@@ -4,8 +4,9 @@ import huy.module4casestudy.model.EMemberType;
 import huy.module4casestudy.model.Member;
 import huy.module4casestudy.model.Player;
 import huy.module4casestudy.model.composite.EStatus;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ public class MemberUpdateDTO {
     private String nationality;
     private String hometown;
     private EMemberType memberType;
-    private String avatar;
 
     // Dữ liệu của Player (chỉ khi memberType là PLAYER)
     private BigDecimal height;
@@ -27,14 +27,12 @@ public class MemberUpdateDTO {
     private EStatus status;
     private Long teamId;
 
-
     public MemberUpdateDTO(Member member, Player player) {
         fullName = member.getFullName();
         dateOfBirth = member.getDateOfBirth();
         nationality = member.getNationality();
         hometown = member.getHometown();
         memberType = member.getMemberType();
-        avatar = member.getFileName();
 
         height = player.getHeight();
         weight = player.getWeight();
@@ -44,3 +42,5 @@ public class MemberUpdateDTO {
         teamId = player.getTeamId();
     }
 }
+
+

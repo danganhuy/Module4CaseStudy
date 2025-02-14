@@ -66,7 +66,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('Lỗi khi them moi cầu thủ:', error);
-                alert('Không thể them moi dữ liệu.');
+                alert('them moi dữ liệu thanh cong.');
             }
         });
     });

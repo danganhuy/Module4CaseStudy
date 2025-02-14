@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -55,7 +56,7 @@ public class MemberController {
         member.setNationality(updatedMember.getNationality());
         member.setHometown(updatedMember.getHometown());
         member.setMemberType(updatedMember.getMemberType());
-
+        memberRepository.save(member); // Lưu member trước
         // Cập nhật hoặc xóa Player tùy theo loại thành viên
         if (updatedMember.getMemberType() == EMemberType.PLAYER) {
             Optional<Player> playerOpt = playerRepository.findById(id);
@@ -68,12 +69,11 @@ public class MemberController {
             player.setBmi(updatedMember.getBmi());
             player.setRanking(updatedMember.getRanking());
 
-            memberRepository.save(member); // Lưu member trước
             playerRepository.save(player); // Sau đó lưu player
         } else {
-//            playerRepository.deleteById(id);
-//            memberRepository.save(member);
-            return ResponseEntity.badRequest().build();
+            // Nếu chuyển từ PLAYER sang COACH, xóa dữ liệu Player
+            playerRepository.deleteById(id);
+            memberRepository.save(member);
         }
 
         return ResponseEntity.ok("Cập nhật thành công!");
@@ -114,35 +114,38 @@ public class MemberController {
 
         return ResponseEntity.ok(response);
     }
-
     @PostMapping("")
-    public ResponseEntity<?> createMember(@RequestBody MemberUpdateDTO newMemberDTO) {
-        // Tạo mới một Member từ DTO
+    public ResponseEntity<?> createMember(@RequestBody MemberUpdateDTO newMember) {
+        if (newMember.getFullName() == null || newMember.getFullName().isEmpty()) {
+            return ResponseEntity.badRequest().body("Họ và tên không được để trống!");
+        }
+
+        if (newMember.getMemberType() == null) {
+            return ResponseEntity.badRequest().body("Loại thành viên không hợp lệ!");
+        }
         Member member = new Member();
-        member.setFullName(newMemberDTO.getFullName());
-        member.setDateOfBirth(newMemberDTO.getDateOfBirth());
-        member.setNationality(newMemberDTO.getNationality());
-        member.setHometown(newMemberDTO.getHometown());
-        member.setMemberType(newMemberDTO.getMemberType());
+        member.setFullName(newMember.getFullName());
+        member.setDateOfBirth(newMember.getDateOfBirth());
+        member.setNationality(newMember.getNationality());
+        member.setHometown(newMember.getHometown());
+        member.setMemberType(newMember.getMemberType());
 
-        // Lưu Member trước
         member = memberRepository.save(member);
+//        memberRepository.save(member);
 
-        // Nếu là Player, tạo và lưu Player
-        if (newMemberDTO.getMemberType() == EMemberType.PLAYER) {
+        if (newMember.getMemberType() == EMemberType.PLAYER) {
             Player player = new Player();
-            player.setId(member.getId()); // Vì dùng @MapsId, ID của Player phải trùng với Member
+            player.setId(member.getId()); // ID trùng với Member (dùng @MapsId)
             player.setMember(member);
-            player.setHeight(newMemberDTO.getHeight());
-            player.setWeight(newMemberDTO.getWeight());
-            player.setBmi(newMemberDTO.getBmi());
-            player.setRanking(newMemberDTO.getRanking());
+            player.setHeight(newMember.getHeight() != null ? newMember.getHeight() : BigDecimal.ZERO);
+            player.setWeight(newMember.getWeight() != null ? newMember.getWeight() : BigDecimal.ZERO);
+            player.setBmi(newMember.getBmi() != null ? newMember.getBmi() : BigDecimal.ZERO);
+            player.setRanking(newMember.getRanking() != null ? newMember.getRanking() : 0);
 
             playerRepository.save(player);
         }
 
-        return ResponseEntity.ok("Thêm mới thành viên thành công!");
+        return ResponseEntity.ok("Thành viên được tạo thành công!");
     }
 
 }
-

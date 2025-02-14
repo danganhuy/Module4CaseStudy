@@ -1,5 +1,6 @@
 package huy.module4casestudy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,5 +31,11 @@ public class Member {
 
     @Column(length = 255)
     private String fileName;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Player player;
+
+
 }
 

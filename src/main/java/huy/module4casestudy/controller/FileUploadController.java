@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 @RestController
 @RequestMapping("/admin/files")
+@CrossOrigin("*")
 public class FileUploadController {
     @Autowired
     private IStorageService storageService;

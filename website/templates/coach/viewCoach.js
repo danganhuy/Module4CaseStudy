@@ -15,8 +15,11 @@
                     $('#coachNationality').text(member.nationality);
                     $('#coachHometown').text(member.hometown);
                     $('#coachType').text(member.memberType);
-                    // $('#coachType').text(member.salary.salary);
-                    // $('#coachType').text(member.memberType);
+                    if (member.fileName) {
+                        $("#coachAvatar").attr("src", `http://localhost:8080/admin/files/${member.fileName}`);
+                    } else {
+                        $("#coachAvatar").attr("src", "default-avatar.jpg"); // Ảnh mặc định
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error('Lỗi khi lấy dữ liệu huấn luyện viên:', error);
@@ -55,6 +58,11 @@
                  $('#nationality').val(member.nationality);
                  $('#hometown').val(member.hometown);
                  $('#memberType').val(member.memberType);
+                 if (member.fileName) {
+                     $("#previewCoachImage").attr("src", `http://localhost:8080/admin/files/${member.fileName}`);
+                 } else {
+                     $("#previewCoachImage").attr("src", "default-avatar.jpg"); // Ảnh mặc định
+                 }
              },
              error: function (xhr, status, error) {
                  console.error('Lỗi khi lấy dữ liệu huấn luyện viên:', error);
@@ -63,32 +71,47 @@
          });
      }
 
+     // Xem trước ảnh khi chọn file mới
+     $("#coachImage").change(function (event) {
+         let reader = new FileReader();
+         reader.onload = function (e) {
+             $("#previewCoachImage").attr("src", e.target.result);
+         };
+         reader.readAsDataURL(event.target.files[0]);
+     });
+
      // Xử lý sự kiện cập nhật
      $('#updateCoachForm').submit(function (event) {
          event.preventDefault();
 
-         const updatedCoach = {
-             fullName: $('#fullName').val(),
-             dateOfBirth: $('#dateOfBirth').val(),
-             nationality: $('#nationality').val(),
-             hometown: $('#hometown').val(),
-             memberType: $('#memberType').val()
-         };
+         let formData = new FormData();
+         formData.append("fullName", $('#fullName').val());
+         formData.append("dateOfBirth", $('#dateOfBirth').val());
+         formData.append("nationality", $('#nationality').val());
+         formData.append("hometown", $('#hometown').val());
+         formData.append("memberType", $('#memberType').val());
+
+         let imageFile = $("#coachImage")[0].files[0];
+         if (imageFile) {
+             formData.append("avatar", imageFile);
+         }
 
          $.ajax({
-             url: `http://localhost:8080/api/members/${id}`,
-             type: 'PUT',
-             contentType: 'application/json',
-             data: JSON.stringify(updatedCoach),
-             success: function () {
+             url: `http://localhost:8080/api/members/${id}/update`,
+             type: "PUT",
+             processData: false,
+             contentType: false,
+             data: formData,
+             success: function (response) {
                  alert('Cập nhật thành công!');
                  $('#updateCoachContainer').fadeOut();
-                 window.location.href = 'coach.html'; // Chuyển về danh sách
+                 location.reload();
              },
              error: function (xhr, status, error) {
-                 console.error('Lỗi khi cập nhật huấn luyện viên:', error);
-                 alert('Không thể cập nhật dữ liệu.');
+                 console.error("Lỗi cập nhật:", error);
+                 alert("Không thể cập nhật dữ liệu.");
              }
          });
      });
+
  });

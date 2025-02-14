@@ -1,6 +1,7 @@
 package huy.module4casestudy.controller;
 
 
+import huy.module4casestudy.configuration.service.IStorageService;
 import huy.module4casestudy.model.DTO.MemberUpdateDTO;
 import huy.module4casestudy.model.EMemberType;
 import huy.module4casestudy.model.Member;
@@ -8,10 +9,16 @@ import huy.module4casestudy.model.Player;
 import huy.module4casestudy.repository.IMemberRepository;
 import huy.module4casestudy.repository.IPlayerRepository;
 import huy.module4casestudy.service.member.MemberService;
+import huy.module4casestudy.service.player.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -22,12 +29,14 @@ import java.util.Optional;
 public class MemberController {
     @Autowired
     private MemberService memberService;
-
     @Autowired
     private IMemberRepository memberRepository;
-
     @Autowired
     private IPlayerRepository playerRepository;
+    @Autowired
+    private IStorageService filesystem;
+    @Autowired
+    private IPlayerService playerService;
 
     @GetMapping("")
     public Iterable<Member> getAllMembers() {
@@ -41,43 +50,65 @@ public class MemberController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateMember(@PathVariable Long id, @RequestBody MemberUpdateDTO updatedMember) {
-        Optional<Member> memberOpt = memberService.findById(id);
-        if (!memberOpt.isPresent()) {
+    @PutMapping("/{id}/update")
+    public ResponseEntity<?> updateMember(@PathVariable Long id,
+                                          @RequestParam(value = "fullName", required = false) String fullName,
+                                          @RequestParam(value = "dateOfBirth", required = false) String dateOfBirth,
+                                          @RequestParam(value = "nationality", required = false) String nationality,
+                                          @RequestParam(value = "hometown", required = false) String hometown,
+                                          @RequestParam(value = "memberType", required = false) String memberType,
+                                          @RequestParam(value = "height", required = false) BigDecimal height,
+                                          @RequestParam(value = "weight", required = false) BigDecimal weight,
+                                          @RequestParam(value = "bmi", required = false) BigDecimal bmi,
+                                          @RequestParam(value = "ranking", required = false) Integer ranking,
+                                          @RequestParam(value = "avatar", required = false) MultipartFile avatar) {
+
+        Optional<Member> optionalMember = memberService.findById(id);
+        Member member = optionalMember.orElse(null);
+        if (member == null) {
             return ResponseEntity.notFound().build();
-
         }
 
-        Member member = memberOpt.get();
-        member.setFullName(updatedMember.getFullName());
-        member.setDateOfBirth(updatedMember.getDateOfBirth());
-        member.setNationality(updatedMember.getNationality());
-        member.setHometown(updatedMember.getHometown());
-        member.setMemberType(updatedMember.getMemberType());
+        member = optionalMember.get();
 
-        // Cập nhật hoặc xóa Player tùy theo loại thành viên
-        if (updatedMember.getMemberType() == EMemberType.PLAYER) {
-            Optional<Player> playerOpt = playerRepository.findById(id);
-            Player player = playerOpt.orElse(new Player());
+        if (fullName != null) member.setFullName(fullName);
+        if (nationality != null) member.setNationality(nationality);
+        if (hometown != null) member.setHometown(hometown);
 
-            player.setId(id); // Vì dùng @MapsId, Player phải có cùng ID với Member
-            player.setMember(member);
-            player.setHeight(updatedMember.getHeight());
-            player.setWeight(updatedMember.getWeight());
-            player.setBmi(updatedMember.getBmi());
-            player.setRanking(updatedMember.getRanking());
-
-            memberRepository.save(member); // Lưu member trước
-            playerRepository.save(player); // Sau đó lưu player
-        } else {
-//            playerRepository.deleteById(id);
-//            memberRepository.save(member);
-            return ResponseEntity.badRequest().build();
+        if (dateOfBirth != null && !dateOfBirth.isEmpty()) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                member.setDateOfBirth(LocalDate.parse(dateOfBirth, formatter));
+            } catch (DateTimeParseException e) {
+                return ResponseEntity.badRequest().body("Ngày sinh không hợp lệ, vui lòng nhập đúng định dạng YYYY-MM-DD.");
+            }
         }
 
+        // Nếu là PLAYER, cập nhật thông tin trong Player
+        if (member.getMemberType() == EMemberType.PLAYER) {
+            Player player = member.getPlayer();
+            if (player == null) {
+                player = new Player();
+                player.setMember(member);
+            }
+            player.setHeight(height);
+            player.setWeight(weight);
+            player.setBmi(bmi);
+            player.setRanking(ranking);
+
+            playerService.save(player);
+            member.setPlayer(player);
+        }
+
+        if (avatar != null && !avatar.isEmpty()) {
+            filesystem.store(avatar);
+            member.setFileName(avatar.getOriginalFilename());
+        }
+
+        memberService.save(member);
         return ResponseEntity.ok("Cập nhật thành công!");
     }
+
 
 
     @DeleteMapping("/{id}")
@@ -103,6 +134,7 @@ public class MemberController {
         response.put("nationality", member.getNationality());
         response.put("hometown", member.getHometown());
         response.put("memberType", member.getMemberType());
+        response.put("fileName", member.getFileName()); // Trả về tên file avatar nếu có, null nếu không có
 
         if (playerOpt.isPresent()) {
             Player player = playerOpt.get();
@@ -116,8 +148,15 @@ public class MemberController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> createMember(@RequestBody MemberUpdateDTO newMemberDTO) {
-        // Tạo mới một Member từ DTO
+    public ResponseEntity<?> createMember(
+            @RequestPart("member") MemberUpdateDTO newMemberDTO,
+            @RequestPart(value = "avatar", required = false) MultipartFile avatar) {
+
+        if (newMemberDTO == null) {
+            return ResponseEntity.badRequest().body("Thiếu thông tin thành viên!");
+        }
+
+        // Khởi tạo Member từ DTO
         Member member = new Member();
         member.setFullName(newMemberDTO.getFullName());
         member.setDateOfBirth(newMemberDTO.getDateOfBirth());
@@ -125,24 +164,27 @@ public class MemberController {
         member.setHometown(newMemberDTO.getHometown());
         member.setMemberType(newMemberDTO.getMemberType());
 
-        // Lưu Member trước
-        member = memberRepository.save(member);
+        // Xử lý avatar (nếu có)
+        if (avatar != null && !avatar.isEmpty()) {
+            String storedFileName = filesystem.store(avatar);
+            member.setFileName(storedFileName);
+        }
 
-        // Nếu là Player, tạo và lưu Player
-        if (newMemberDTO.getMemberType() == EMemberType.PLAYER) {
+        // Nếu là PLAYER, cập nhật thông tin Player
+        if (EMemberType.PLAYER.equals(member.getMemberType())) {
             Player player = new Player();
-            player.setId(member.getId()); // Vì dùng @MapsId, ID của Player phải trùng với Member
             player.setMember(member);
             player.setHeight(newMemberDTO.getHeight());
             player.setWeight(newMemberDTO.getWeight());
             player.setBmi(newMemberDTO.getBmi());
             player.setRanking(newMemberDTO.getRanking());
 
-            playerRepository.save(player);
+            playerService.save(player);
+            member.setPlayer(player);
         }
 
-        return ResponseEntity.ok("Thêm mới thành viên thành công!");
+        memberService.save(member);
+        return ResponseEntity.ok("Cập nhật thành công!");
     }
 
 }
-

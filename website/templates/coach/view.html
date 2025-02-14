@@ -57,7 +57,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <h2 class="text-center">Chi Tiết Huấn Luyện Viên</h2>
                                 <div id="coachDetail" class="card p-3">
-                                    <p><strong>ID:</strong> <span id="coachId"></span></p>
+                                    <img id="coachAvatar" src="" alt="Ảnh Huấn Luyện Viên" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
                                     <p><strong>Họ và Tên:</strong> <span id="coachName"></span></p>
                                     <p><strong>Ngày Sinh:</strong> <span id="coachDob"></span></p>
                                     <p><strong>Quốc tịch:</strong> <span id="coachNationality"></span></p>
@@ -113,6 +113,51 @@
     </div>
 </div>
 
+<div id="updateCoachContainer"
+     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px;
+                border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 350px;">
+        <h3 style="text-align: center;">Cập Nhật Huấn Luyện Viên</h3>
+        <form id="updateCoachForm" style="display: flex; flex-direction: column; gap: 10px;">
+
+            <!-- Ảnh đại diện -->
+            <div style="text-align: center;">
+                <img id="previewCoachImage" src="default-avatar.jpg"
+                     alt="Ảnh đại diện" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px;">
+                <input type="file" id="coachImage" name="image" accept="image/*">
+            </div>
+
+            <label for="fullName">Họ và Tên:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="dateOfBirth">Ngày Sinh:</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+
+            <label for="nationality">Quốc tịch:</label>
+            <input type="text" id="nationality" name="nationality" required>
+
+            <label for="hometown">Quê quán:</label>
+            <input type="text" id="hometown" name="hometown" required>
+
+            <label for="memberType">Loại Thành Viên:</label>
+            <select id="memberType" name="memberType" required>
+                <option value="COACH">Huấn luyện viên</option>
+                <option value="PLAYER">Cầu thủ</option>
+            </select>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <button type="submit" style="background-color: green; color: white; padding: 8px; border: none; cursor: pointer;">
+                    Cập nhật
+                </button>
+                <button type="button" id="closeFormBtn"
+                        style="background-color: red; color: white; padding: 8px; border: none; cursor: pointer;">
+                    Đóng
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Create sidebar topbar footer -->
 <script src="../../static/myScript/layout.js"></script>
 
@@ -134,33 +179,7 @@
 <script src="../../static/js/demo/datatables-demo.js"></script>
 
 </body>
-<div id="updateCoachContainer" style="display: none; position: fixed;top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(128,128,128,0.5)">
-<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    <h3>Cập Nhật Huấn Luyện Viên</h3>
-    <form id="updateCoachForm">
-        <label for="fullName">Họ và Tên:</label>
-        <input type="text" id="fullName" name="fullName" required><br>
 
-        <label for="dateOfBirth">Ngày Sinh:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
-
-        <label for="nationality">Quốc tịch:</label>
-        <input type="text" id="nationality" name="nationality" required><br>
-
-        <label for="hometown">Quê quán:</label>
-        <input type="text" id="hometown" name="hometown" required><br>
-
-        <label for="memberType">Loại Thành Viên:</label>
-        <select id="memberType" name="memberType" required>
-            <option value="COACH">Huấn luyện viên</option>
-            <option value="PLAYER">Cầu thủ</option>
-        </select><br>
-
-        <button type="submit">Cập nhật</button>
-        <button type="button" id="closeFormBtn">Đóng</button>
-    </form>
-</div>
-</div>
 <script src="viewCoach.js"></script>
 
 </html>

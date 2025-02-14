@@ -98,7 +98,7 @@
 
          $.ajax({
              url: `http://localhost:8080/api/members/${id}/update`,
-             type: "POST",
+             type: "PUT",
              processData: false,
              contentType: false,
              data: formData,

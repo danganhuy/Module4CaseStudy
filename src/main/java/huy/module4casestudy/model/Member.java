@@ -35,5 +35,7 @@ public class Member {
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     @JsonIgnore
     private Player player;
+
+
 }
 

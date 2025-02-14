@@ -110,7 +110,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: `http://localhost:8080/api/members/${playerId}/update`,
-            type: 'POST',
+            type: 'PUT',
             contentType: false,
             processData: false,
             data: formData,

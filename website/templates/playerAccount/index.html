@@ -44,48 +44,31 @@
                 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h1 class="m-0 font-weight-bold text-primary">Chi tiết cầu thủ</h1>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
+                                <p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>
+                                <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
+                                <p><strong>Quê quán:</strong> <span id="detailHometown"></span></p>
+                                <p><strong>Loại Thành Viên:</strong> <span id="detailMemberType"></span></p>
+                                <p><strong>Chiều cao:</strong> <span id="detailHeight"></span> m</p>
+                                <p><strong>Cân nặng:</strong> <span id="detailWeight"></span> kg</p>
+                                <p><strong>BMI:</strong> <span id="detailBmi"></span></p>
+                                <p><strong>Xếp hạng:</strong> <span id="detailRanking"></span></p>
+                                
+                                <button onclick="window.location.href='listSalary.html'"
+                                        class="btn btn-primary mt-3 px-4 py-2 rounded">
+                                    Bảng lương
+                                </button>
+                                <button onclick="window.location.href='listMatches.html'"
+                                    class="btn btn-primary  mt-3 px-4 py-2 rounded">
+                                    Lịch sử thi đấu
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -130,6 +113,7 @@
         </div>
     </div>
     
+    
     <!-- Create sidebar topbar footer -->
     <script src="../layout.js"></script>
     
@@ -143,13 +127,7 @@
     <!-- Custom scripts for all pages-->
     <script src="../../static/js/sb-admin-2.min.js"></script>
     
-    <!-- Page level plugins -->
-    <script src="../../static/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    
-    <!-- Page level custom scripts -->
-    <script src="../../static/js/demo/datatables-demo.js"></script>
-
+    <script src="index.js"></script>
 </body>
 
 </html>

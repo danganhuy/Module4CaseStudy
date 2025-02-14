@@ -19,6 +19,11 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
+    public Integer getPlayerCountByTeamId(Long teamId) {
+        return playerRepository.countByTeamId(teamId);
+    }
+
+    @Override
     public List<Player> findAll() {
         return playerRepository.findAll();
 

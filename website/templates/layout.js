@@ -8,7 +8,7 @@ function createSidebar() {
         "                <div class=\"sidebar-brand-icon rotate-n-15\">\n" +
         "                    <i class=\"fas fa-laugh-wink\"></i>\n" +
         "                </div>\n" +
-        "                <div class=\"sidebar-brand-text mx-3\">SB Admin <sup>2</sup></div>\n" +
+        "                <div class=\"sidebar-brand-text mx-3\">Trang chủ</div>\n" +
         "            </a>\n" +
         "            \n" +
         "            <!-- Divider -->\n" +
@@ -28,28 +28,8 @@ function createSidebar() {
         "            <div class=\"sidebar-heading\">\n" +
         "                Main\n" +
         "            </div>\n" +
-        "            \n" +
-        "            <!-- Nav Item - Pages Collapse Menu -->\n" +
         "            <li class=\"nav-item\">\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
-        "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
-        "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
-        "                    <span>Table</span>\n" +
-        "                </a>\n" +
-        "                <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n" +
-        "                    <div class=\"bg-white py-2 collapse-inner rounded\">\n" +
-        "                        <!--                        <h6 class=\"collapse-header\">Custom Components:</h6>-->\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Coach</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"listMatches.html\">Match</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Member</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Player</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Salary</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">Team</a>\n" +
-        "                        <a class=\"collapse-item\" href=\"#\">User</a>\n" +
-        "                    </div>\n" +
-        "                </div>\n" +
-        "            </li>\n" +
-        "            \n" +
+        createOption() +
         "            <!-- Divider -->\n" +
         "            <hr class=\"sidebar-divider\">\n" +
         "            \n" +
@@ -61,7 +41,15 @@ function createSidebar() {
 }
 
 function createOption() {
-
+    let role = localStorage.getItem("role");
+    switch (role) {
+        case "ROLE_ADMIN":
+            return createOptionForAdmin();
+        case "ROLE_COACH":
+            return createOptionForCoach();
+        case "ROLE_PLAYER":
+            return createOptionForPlayer();
+    }
 }
 
 function createOptionForAdmin() {
@@ -93,17 +81,17 @@ function createOptionForCoach() {
 function createOptionForPlayer() {
     return "" +
         "            <li class=\"nav-item\">\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"index.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Thông tin cá nhân</span>\n" +
         "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listSalary.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Bảng lương</span>\n" +
         "                </a>\n" +
-        "                <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\n" +
+        "                <a class=\"nav-link collapsed\" href=\"listMatches.html\"\n" +
         "                   aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n" +
         "                    <i class=\"fas fa-fw fa-table\"></i>\n" +
         "                    <span>Lịch sử thi đấu</span>\n" +
@@ -123,31 +111,6 @@ function createTopbar() {
         "                        \n" +
         "                        <!-- Topbar Navbar -->\n" +
         "                        <ul class=\"navbar-nav ml-auto\">\n" +
-        "                            \n" +
-        "                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->\n" +
-        "                            <li class=\"nav-item dropdown no-arrow d-sm-none\">\n" +
-        "                                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"searchDropdown\" role=\"button\"\n" +
-        "                                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-        "                                    <i class=\"fas fa-search fa-fw\"></i>\n" +
-        "                                </a>\n" +
-        "                                <!-- Dropdown - Messages -->\n" +
-        "                                <div class=\"dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in\"\n" +
-        "                                     aria-labelledby=\"searchDropdown\">\n" +
-        "                                    <form class=\"form-inline mr-auto w-100 navbar-search\">\n" +
-        "                                        <div class=\"input-group\">\n" +
-        "                                            <input type=\"text\" class=\"form-control bg-light border-0 small\"\n" +
-        "                                                   placeholder=\"Search for...\" aria-label=\"Search\"\n" +
-        "                                                   aria-describedby=\"basic-addon2\">\n" +
-        "                                            <div class=\"input-group-append\">\n" +
-        "                                                <button class=\"btn btn-primary\" type=\"button\">\n" +
-        "                                                    <i class=\"fas fa-search fa-sm\"></i>\n" +
-        "                                                </button>\n" +
-        "                                            </div>\n" +
-        "                                        </div>\n" +
-        "                                    </form>\n" +
-        "                                </div>\n" +
-        "                            </li>\n" +
-        "                            \n" +
         "                            <!-- Nav Item - User Information -->\n" +
         "                            <li class=\"nav-item dropdown no-arrow\">\n" +
         "                                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"\n" +

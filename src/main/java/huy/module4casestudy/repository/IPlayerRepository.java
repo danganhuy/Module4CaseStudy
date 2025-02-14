@@ -12,6 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface IPlayerRepository extends JpaRepository<Player, Long> {
-    Optional<Player> findByMemberId(Long memberId);
     List<Player> findAllByTeamId(Long teamId);
+    Integer countByTeamId(Long teamId);
 }

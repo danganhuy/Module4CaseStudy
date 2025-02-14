@@ -55,36 +55,21 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                    </tbody>
+                                    <h2 class="text-center">Chi Tiết Huấn Luyện Viên</h2>
+                                    <div id="coachDetail" class="card p-3">
+                                        <p><strong>ID:</strong> <span id="coachId"></span></p>
+                                        <p><strong>Họ và Tên:</strong> <span id="coachName"></span></p>
+                                        <p><strong>Ngày Sinh:</strong> <span id="coachDob"></span></p>
+                                        <p><strong>Quốc tịch:</strong> <span id="coachNationality"></span></p>
+                                        <p><strong>Quê quán:</strong> <span id="coachHometown"></span></p>
+                                        <p><strong>Loại Thành Viên:</strong> <span id="coachType"></span></p>
+                                    </div>
+                                    <button onclick="window.location.href='coach.html'"
+                                            class="btn btn-primary mt-3 px-4 py-2 rounded">Quay lại
+                                    </button>
+                                    <button id="editCoachBtn" class="btn btn-primary  mt-3 px-4 py-2 rounded">Chỉnh
+                                        sửa
+                                    </button>
                                 </table>
                             </div>
                         </div>
@@ -124,14 +109,14 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login/login.html">Logout</a>
+                    <a class="btn btn-primary" href="../login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
     
     <!-- Create sidebar topbar footer -->
-    <script src="../../static/myScript/layout.js"></script>
+    <script src="../layout.js"></script>
     
     <!-- Bootstrap core JavaScript-->
     <script src="../../static/vendor/jquery/jquery.min.js"></script>
@@ -149,6 +134,7 @@
     
     <!-- Page level custom scripts -->
     <script src="../../static/js/demo/datatables-demo.js"></script>
+    <script src="index.js"></script>
 
 </body>
 

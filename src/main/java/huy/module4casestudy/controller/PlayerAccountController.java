@@ -31,8 +31,6 @@ public class PlayerAccountController {
     private ISalaryService salaryService;
     @Autowired
     private IMatchPlayerService matchPlayerService;
-    @Autowired
-    private IMatchesService matchesService;
 
     @GetMapping("/details")
     public ResponseEntity<?> getPlayerDetails(HttpServletRequest request) {

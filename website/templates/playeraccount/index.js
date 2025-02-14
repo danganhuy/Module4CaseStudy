@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        headers:{
+        headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
         url: `http://localhost:8080/player/details`,
@@ -26,5 +26,6 @@ $(document).ready(function () {
             $('#bmi').val(bmi);
         }
     }
+
     $('#height, #weight').on('input', calculateBMI);
 });

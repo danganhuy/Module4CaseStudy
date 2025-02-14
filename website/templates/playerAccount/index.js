@@ -10,7 +10,6 @@ $(document).ready(function () {
             $("#detailDateOfBirth").text(data.dateOfBirth);
             $("#detailNationality").text(data.nationality);
             $("#detailHometown").text(data.hometown);
-            $("#detailMemberType").text(data.memberType);
             $("#detailHeight").text(data.height);
             $("#detailWeight").text(data.weight);
             $("#detailBmi").text(data.bmi);

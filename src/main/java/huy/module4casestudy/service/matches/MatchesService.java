@@ -32,4 +32,9 @@ public class MatchesService implements IMatchesService {
     public void delete(Matches matches) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public List<Matches> getMatchesByCoachId(Long coachId) {
+        return matchesRepository.findByCoachId(coachId);
+    }
 }

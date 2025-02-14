@@ -2,6 +2,7 @@ package huy.module4casestudy.controller;
 
 import huy.module4casestudy.model.*;
 import huy.module4casestudy.model.DTO.CoachDTO;
+import huy.module4casestudy.model.DTO.MemberUpdateDTO;
 import huy.module4casestudy.model.DTO.TeamDTO;
 import huy.module4casestudy.service.coach.ICoachService;
 import huy.module4casestudy.service.matches.IMatchesService;
@@ -12,14 +13,17 @@ import huy.module4casestudy.service.salary.ISalaryService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/coach")
+@CrossOrigin("*")
 public class CoachAccountController {
     @Autowired
     private IMemberService memberService;
@@ -30,7 +34,7 @@ public class CoachAccountController {
     @Autowired
     private ISalaryService salaryService;
     @Autowired
-    private IMatchesService IMatchesService;
+    private IMatchesService matchesService;
 
     @GetMapping("/details")
     public ResponseEntity<?> getDetails(HttpServletRequest request) {
@@ -55,14 +59,24 @@ public class CoachAccountController {
         Long id = Long.parseLong(request.getAttribute("id").toString());
         Coach coach = coachService.findById(id).get();
         List<Player> playerList = playerService.getPlayersByTeamId(coach.getTeam().getId());
-        return ResponseEntity.ok(playerList);
+        List<MemberUpdateDTO> playerListDTO = new ArrayList<>();
+        for (Player player : playerList) {
+            playerListDTO.add(new MemberUpdateDTO(player.getMember(), player));
+        }
+        return ResponseEntity.ok(playerListDTO);
     }
 
     @GetMapping("/listSalary")
     public ResponseEntity<?> getListSalary(HttpServletRequest request) {
         Long id = Long.parseLong(request.getAttribute("id").toString());
-        Member member = memberService.findById(id).get();
         List<Salary> salaryList = salaryService.getSalariesById(id);
         return ResponseEntity.ok(salaryList);
+    }
+
+    @GetMapping("/listMatches")
+    public ResponseEntity<?> getListMatch(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getAttribute("id").toString());
+        List<Matches> matchesList = matchesService.getMatchesByCoachId(id);
+        return ResponseEntity.ok(matchesList);
     }
 }

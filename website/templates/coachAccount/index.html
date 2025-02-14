@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Coach Details</title>
     
     <!-- Custom fonts for this template-->
     <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,30 +45,31 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Chi tiết huấn luyện viên</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <h2 class="text-center">Chi Tiết Huấn Luyện Viên</h2>
                                     <div id="coachDetail" class="card p-3">
-                                        <p><strong>ID:</strong> <span id="coachId"></span></p>
                                         <p><strong>Họ và Tên:</strong> <span id="coachName"></span></p>
                                         <p><strong>Ngày Sinh:</strong> <span id="coachDob"></span></p>
                                         <p><strong>Quốc tịch:</strong> <span id="coachNationality"></span></p>
                                         <p><strong>Quê quán:</strong> <span id="coachHometown"></span></p>
-                                        <p><strong>Loại Thành Viên:</strong> <span id="coachType"></span></p>
+                                        <p><strong>Đội bóng:</strong> <span id="coachTeam"></span></p>
+                                        <p><strong>Số lượng cầu thủ:</strong> <span id="coachPlayerCount"></span></p>
                                     </div>
-                                    <button onclick="window.location.href='coach.html'"
-                                            class="btn btn-primary mt-3 px-4 py-2 rounded">Quay lại
+                                    <button onclick="window.location.href='listSalary.html'"
+                                            class="btn btn-primary mt-3 px-4 py-2 rounded">Bảng lương
                                     </button>
-                                    <button id="editCoachBtn" class="btn btn-primary  mt-3 px-4 py-2 rounded">Chỉnh
-                                        sửa
+                                    <button onclick="window.location.href='listMatches.html'"
+                                            class="btn btn-primary mt-3 px-4 py-2 rounded">Lịch sử trận đấu
+                                    </button>
+                                    <button onclick="window.location.href='listPlayer.html'"
+                                            class="btn btn-primary mt-3 px-4 py-2 rounded">Thành viên đội bóng
                                     </button>
                                 </table>
                             </div>
@@ -109,7 +110,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login.html">Logout</a>
+                    <a class="btn btn-primary" href="../login/login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -128,12 +129,6 @@
     <!-- Custom scripts for all pages-->
     <script src="../../static/js/sb-admin-2.min.js"></script>
     
-    <!-- Page level plugins -->
-    <script src="../../static/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    
-    <!-- Page level custom scripts -->
-    <script src="../../static/js/demo/datatables-demo.js"></script>
     <script src="index.js"></script>
 
 </body>

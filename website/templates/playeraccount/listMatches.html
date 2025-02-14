@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Player Match</title>
     
     <!-- Custom fonts for this template-->
     <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,27 +47,32 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h1 class="m-0 font-weight-bold text-primary">Chi tiết cầu thủ</h1>
+                            <h1 class="m-0 font-weight-bold text-primary">Salary history</h1>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
-                                <p><strong>Ngày sinh:</strong> <span id="detailDateOfBirth"></span></p>
-                                <p><strong>Quốc tịch:</strong> <span id="detailNationality"></span></p>
-                                <p><strong>Quê quán:</strong> <span id="detailHometown"></span></p>
-                                <p><strong>Loại Thành Viên:</strong> <span id="detailMemberType"></span></p>
-                                <p><strong>Chiều cao:</strong> <span id="detailHeight"></span> m</p>
-                                <p><strong>Cân nặng:</strong> <span id="detailWeight"></span> kg</p>
-                                <p><strong>BMI:</strong> <span id="detailBmi"></span></p>
-                                <p><strong>Xếp hạng:</strong> <span id="detailRanking"></span></p>
-                                
-                                <button onclick="window.location.href='salaries.html'"
-                                        class="btn btn-primary mt-3 px-4 py-2 rounded">
-                                    Bảng lương
-                                </button>
-                                <button id="editPlayerBtn" class="btn btn-primary  mt-3 px-4 py-2 rounded">
-                                    Lịch sử thi đấu
-                                </button>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Ngày thi đấu</th>
+                                            <th>Địa điểm</th>
+                                            <th>Đánh giá</th>
+                                            <th>Nhận xét</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Ngày thi đấu</th>
+                                            <th>Địa điểm</th>
+                                            <th>Đánh giá</th>
+                                            <th>Nhận xét</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody id="table-body">
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -112,7 +117,6 @@
         </div>
     </div>
     
-    
     <!-- Create sidebar topbar footer -->
     <script src="../../static/myScript/layout.js"></script>
     
@@ -126,7 +130,15 @@
     <!-- Custom scripts for all pages-->
     <script src="../../static/js/sb-admin-2.min.js"></script>
     
-    <script src="playerDetails.js"></script>
+    <!-- Page level plugins -->
+    <script src="../../static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Page level custom scripts -->
+    <script src="../../static/js/demo/datatables-demo.js"></script>
+    
+    <script src="listMatches.js"></script>
+
 </body>
 
 </html>

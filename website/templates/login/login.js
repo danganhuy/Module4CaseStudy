@@ -15,14 +15,17 @@ function login() {
         data: JSON.stringify(user),
         success: function (data) {
             let token = JSON.parse(JSON.stringify(data)).token;
+            let username = JSON.parse(JSON.stringify(data)).username;
+            let role = JSON.parse(JSON.stringify(data)).authorities[0].authority;
+            localStorage.setItem("data", JSON.stringify(data))
             localStorage.setItem("token",token);
+            localStorage.setItem("username",username);
+            localStorage.setItem("role",role);
             window.location.href="index.html";
         },
         error: function (request, status, error) {
-            document.getElementById("error_message").innerText = "Incorrect username or password";
-            console.log(request);
-            console.log(status);
-            console.log(error);
+            // document.getElementById("error_message").innerText = "Incorrect username or password";
+            alert("Incorrect username or password");
         }
     })
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IPlayerService extends IGenericService<Player> {
     List<Player> getPlayersByTeamId(Long teamId);
+}
 
 
 

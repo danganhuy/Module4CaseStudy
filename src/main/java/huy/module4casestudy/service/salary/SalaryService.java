@@ -32,4 +32,9 @@ public class SalaryService implements ISalaryService {
     public void delete(Salary salary) {
         salaryRepository.delete(salary);
     }
+
+    @Override
+    public List<Salary> getSalariesById(Long id) {
+        return salaryRepository.findAllByIdId(id);
+    }
 }

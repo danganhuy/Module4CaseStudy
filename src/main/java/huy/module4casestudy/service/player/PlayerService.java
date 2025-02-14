@@ -11,11 +11,11 @@ import java.util.Optional;
 @Service
 public class PlayerService implements IPlayerService{
     @Autowired
-    private IPlayerRepository iPlayerRepository;
+    private IPlayerRepository playerRepository;
 
     @Override
     public List<Player> getPlayersByTeamId(Long teamId) {
-        return iPlayerRepository.findAllByTeamId(teamId);
+        return playerRepository.findAllByTeamId(teamId);
     }
 
     @Override
